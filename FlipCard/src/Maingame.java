@@ -45,6 +45,8 @@ import java.awt.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.ListSelectionModel;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.swing.JInternalFrame;
 
 
@@ -53,6 +55,23 @@ public class Maingame extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	public int indexofColorID=1;
+	public JLabel Card0;
+	public JLabel Card1;
+	public JLabel Card2;
+	public JLabel Card3;
+	public JLabel Card4;
+	public JLabel Card5;
+	public JLabel Card6;
+	public JLabel Card7;
+	public JLabel Card8;
+	public JLabel Card9;
+	public JLabel Card10;
+	public JLabel Card11;
+	public JLabel Card12;
+	public JLabel Card13;
+	public JLabel Card14;
+	public JLabel Card15;
+	public JLabel Timershow;
 	
 	/**
 	 * Launch the application.
@@ -484,8 +503,50 @@ public class Maingame extends JFrame {
 		});
 		Init.setBounds(666, 186, 97, 23);
 		contentPane.add(Init);
+		
+		JLabel Timershow = new JLabel("ready");
+		Timershow.setHorizontalAlignment(SwingConstants.CENTER);
+		Timershow.setEnabled(false);
+		Timershow.setBounds(533, 190, 57, 15);
+		contentPane.add(Timershow);
+			
 
+	    Timer jobScheduler = new Timer();
+		TimerTask Timerjob = new TimerTask() {
+			int Timertime = 10;
+			@Override
+			public void run() {
+				String showTimertime = Integer.toString(Timertime);
+				if(Timertime > -1) {
+					Timershow.setText(showTimertime);
+					Timertime--;
+				}
+				else{
+					Card0.setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
+					Card1.setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
+					Card2.setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
+					Card3.setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
+					Card4.setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
+					Card5.setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
+					Card6.setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
+					Card7.setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
+					Card8.setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
+					Card9.setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
+					Card10.setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
+					Card11.setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
+					Card12.setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
+					Card13.setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
+					Card14.setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
+					Card15.setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
+				}
+			}
+		};
+	      jobScheduler.scheduleAtFixedRate(Timerjob, 7000, 1000);
+	      
+
+	    
+	}
 		
 }
-}
+
 
