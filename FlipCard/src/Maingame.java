@@ -52,8 +52,6 @@ public class Maingame extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
-	private JButton Card2;
-	private long time = 0l, preTime = 0l; // 시간 계산을 위한 변수들
 	public int indexofColorID=1;
 	
 	/**
