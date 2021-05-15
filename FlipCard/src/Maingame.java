@@ -456,13 +456,13 @@ public class Maingame extends JFrame {
 		layeredPane.add(Card15);
 		
 
-		JLabel lblNewLabel_1 = new JLabel("Timer");
+		JLabel lblNewLabel_1 = new JLabel("Timer :");
 		lblNewLabel_1.setEnabled(false);
 		lblNewLabel_1.setForeground(new Color(0, 0, 0));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_1.setBackground(Color.WHITE);
 		lblNewLabel_1.setFont(new Font("Showcard Gothic", Font.PLAIN, 18));
-		lblNewLabel_1.setBounds(472, 186, 60, 23);
+		lblNewLabel_1.setBounds(472, 186, 71, 23);
 		contentPane.add(lblNewLabel_1);
 		
 		textField = new JTextField();
@@ -480,36 +480,16 @@ public class Maingame extends JFrame {
 		m_outTextPane.setBounds(472, 218, 286, 217);
 		contentPane.add(m_outTextPane);
 		
-		JButton Init = new JButton("Init");
-		Init.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Card0.setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
-				Card1.setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
-				Card2.setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
-				Card3.setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
-				Card4.setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
-				Card5.setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
-				Card6.setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
-				Card7.setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
-				Card8.setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
-				Card9.setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
-				Card10.setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
-				Card11.setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
-				Card12.setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
-				Card13.setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
-				Card14.setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
-				Card15.setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
-			}
-		});
-		Init.setBounds(666, 186, 97, 23);
-		contentPane.add(Init);
 		
 		JLabel Timershow = new JLabel("ready");
-		Timershow.setHorizontalAlignment(SwingConstants.CENTER);
+		Timershow.setFont(new Font("Showcard Gothic", Font.BOLD, 18));
+		Timershow.setHorizontalAlignment(SwingConstants.LEFT);
+		Timershow.setForeground(new Color(0, 0, 0));
 		Timershow.setEnabled(false);
-		Timershow.setBounds(533, 190, 57, 15);
+		Timershow.setBounds(540, 187, 80, 20);
 		contentPane.add(Timershow);
-			
+		
+
 
 	    Timer jobScheduler = new Timer();
 		TimerTask Timerjob = new TimerTask() {
@@ -541,7 +521,7 @@ public class Maingame extends JFrame {
 				}
 			}
 		};
-	      jobScheduler.scheduleAtFixedRate(Timerjob, 7000, 1000);
+	      jobScheduler.scheduleAtFixedRate(Timerjob, 3000, 1000);
 	      
 
 	    
