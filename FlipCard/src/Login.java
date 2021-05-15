@@ -85,6 +85,10 @@ public class Login {
 		frmFlipCard.getContentPane().add(lblShowimages);
 		lblShowimages.setIcon(new ImageIcon("../FlipCard/Img/Login.png"));
 	}
+	
+	public String GetLoginID() {
+		return username.getText();
+	}
 
 	public Object Login() {
 		// TODO Auto-generated method stub
