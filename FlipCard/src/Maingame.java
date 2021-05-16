@@ -53,16 +53,19 @@ public class Maingame extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	public JLabel Timershow;
-	
-	public JButton[] CardArray = new JButton[16];{
-	for(int i=0;i<16;i++) {
-			CardArray[i]=new JButton("");//버튼 초기화
+	public boolean startflag = false;
+
+	public JButton[] CardArray = new JButton[16];
+	{
+		for (int i = 0; i < 16; i++) {
+			CardArray[i] = new JButton("");// 버튼 초기화
 			CardArray[i].setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
 			CardArray[i].setForeground(new Color(255, 255, 255));
 			CardArray[i].setBackground(new Color(211, 211, 211));
 		}
 
 	}
+
 	/**
 	 * Launch the application.
 	 */
@@ -423,7 +426,6 @@ public class Maingame extends JFrame {
 		CardArray[13].setBounds(121, 352, 97, 104);
 		layeredPane.add(CardArray[13]);
 
-		
 		CardArray[14].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				switch (MyUser.GetMyColor()) {
@@ -519,38 +521,27 @@ public class Maingame extends JFrame {
 	}
 
 	public void init() {
-		CardArray[0].setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
-		CardArray[1].setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
-		CardArray[2].setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
-		CardArray[3].setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
-		CardArray[4].setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
-		CardArray[5].setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
-		CardArray[6].setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
-		CardArray[7].setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
-		CardArray[8].setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
-		CardArray[9].setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
-		CardArray[10].setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
-		CardArray[11].setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
-		CardArray[12].setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
-		CardArray[13].setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
-		CardArray[14].setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
-		CardArray[15].setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
+		for (int i = 0; i < 16; i++) {
+			CardArray[i].setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
+		}
 	}
-	
+
 	public void ChangeColor(int Color, int Cardnum) {
-		switch (Color) {
-		case 1:
-			CardArray[Cardnum].setIcon(new ImageIcon("../FlipCard/Img/Cardusr1.png"));
-			break;
-		case 2:
-			CardArray[Cardnum].setIcon(new ImageIcon("../FlipCard/Img/Cardusr2.png"));
-			break;
-		case 3:
-			CardArray[Cardnum].setIcon(new ImageIcon("../FlipCard/Img/Cardusr3.png"));
-			break;
-		case 4:
-			CardArray[Cardnum].setIcon(new ImageIcon("../FlipCard/Img/Cardusr4.png"));
-			break;
+		if (startflag) {
+			switch (Color) {
+			case 1:
+				CardArray[Cardnum].setIcon(new ImageIcon("../FlipCard/Img/Cardusr1.png"));
+				break;
+			case 2:
+				CardArray[Cardnum].setIcon(new ImageIcon("../FlipCard/Img/Cardusr2.png"));
+				break;
+			case 3:
+				CardArray[Cardnum].setIcon(new ImageIcon("../FlipCard/Img/Cardusr3.png"));
+				break;
+			case 4:
+				CardArray[Cardnum].setIcon(new ImageIcon("../FlipCard/Img/Cardusr4.png"));
+				break;
+			}
 		}
 	}
 
