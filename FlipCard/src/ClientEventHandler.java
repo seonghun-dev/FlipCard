@@ -57,10 +57,15 @@ public class ClientEventHandler implements CMAppEventHandler
 			FlipCardClient newgame = new FlipCardClient();
 			//newgame.FlipCardClientGame();
 			MyUser.GetMyuserColor(newgame.uname);
+			FlipCardClient changeflag = new FlipCardClient();
+			changeflag.openflag = true;
+			
+			
 			//로그인창 닫기
 			//메인게임 불러오기
 			
 		case "START":
+			
 			//카드 초기화
 			//시간 10초로 보여짐
 			//클라측 이벤트 핸들러 작동

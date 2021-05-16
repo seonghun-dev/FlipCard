@@ -68,6 +68,10 @@ public class Login {
 			public void actionPerformed(ActionEvent e) {
 				String uname=username.getText();
 				JOptionPane.showMessageDialog(frmFlipCard, "로그인이 완료되었습니다.");
+				//이벤트 핸들러 기다림
+				Maingame frame = new Maingame(); //maingame 창 띄움
+		    	frame.setVisible(true);
+		    	frmFlipCard.setVisible(false); //Login창 닫음.
 			}
 		});
 		btnLogin.setBounds(309, 391, 149, 45);
@@ -95,4 +99,5 @@ public class Login {
 		return null;
 	}
 }
+
 
