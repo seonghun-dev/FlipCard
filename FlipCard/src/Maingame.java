@@ -83,18 +83,16 @@ public class Maingame extends JFrame {
 	}
 
 	
-
-	
+	User MyUser = new User();
 	
 	/**
 	 * Create the frame.
 	 */
 	public Maingame() {
 		
-		User MyUser = new User();
 		MyUser.ChangeCurrentUser("테스트브라운","BROWN");
 		MyUser.ChangeCurrentUser("테스트블루","BLUE");
-		MyUser. GetMyuserColor("테스트블루");
+
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage("../FlipCard/Img/icon.png"));
 		setFont(new Font("Brush Script MT", Font.PLAIN, 15));

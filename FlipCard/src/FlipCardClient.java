@@ -1,53 +1,35 @@
-import javax.swing.JLabel;
+import java.awt.*;// 그래픽 처리를 위한 클래스들의 경로명
+import java.awt.event.*; // AWT 이벤트 사용을 위한 경로명 
+import javax.swing.*; // 스윙 컴포넌트 클래스들의 경로명 
+import javax.swing.event.*; // 스윙 이벤트를 위한 경로
+import javax.swing.text.BadLocationException;
+import javax.swing.text.StyledDocument;
 
-import kr.ac.konkuk.ccslab.cm.stub.CMServerStub;
+import kr.ac.konkuk.ccslab.cm.entity.CMUser;
+import kr.ac.konkuk.ccslab.cm.event.CMDummyEvent;
+import kr.ac.konkuk.ccslab.cm.info.CMInteractionInfo;
+import kr.ac.konkuk.ccslab.cm.stub.CMClientStub;
+import java.util.ArrayList;
+import java.util.Random;
 
-public class FlipCardClient{
+public class FlipCardClient {
+   CMUser myself;
+   private CMClientStub m_clientStub;
+   String uname="";
+   
+   public void  FlipCardClientGame(CMClientStub clientStub) {
+      m_clientStub=clientStub;
+      CMInteractionInfo interInfo=m_clientStub.getCMInfo().getInteractionInfo();
+      myself=interInfo.getMyself();
+      uname=myself.getName();
+   }
+   
+   public void printmessage(String message, String type) {
+      switch(type) {
+      case "Chat":
+      case "Winner":
+      }
+      
+   }
 
-
-}
-
-
-
-class User{
-	public String Userinfo[] = new String[4]; // 유저배열
-	private static int indexofColorID=1; //현재사용자의 컬러값
-	
-	 
-	 //현재 사용자 변경
-	 public void ChangeCurrentUser(String UserID,String Color) {
-		 switch (Color) {
-         case "BROWN":  Userinfo[0]=UserID;
-                  break;
-         case "BLUE":  Userinfo[1]=UserID;
-                  break;
-         case "PINK":   Userinfo[2]=UserID;
-                  break;
-         case "GREEN":   Userinfo[3]=UserID;
-                  break;
-         }
-	 }
-	 
-	 
-	 //사용자 본인의 색상값 확인.
-	 public void GetMyuserColor(String UserID) {
-		 for(int i=0;i<4;i++) {
-			 if(Userinfo[i] == UserID) {
-				 indexofColorID = i+1;
-				 break;
-			 }
-		 }
-	 }
-	 
-	 
-	 
-	//사용자 본인 색상 가져오기
-	 public int GetMyColor() {
-		 return indexofColorID;
-	 }
-	 
-	 
-	 
-	 
-	 
 }
