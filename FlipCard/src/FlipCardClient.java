@@ -14,7 +14,6 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
 public class FlipCardClient {
    CMUser myself;
    private CMClientStub m_clientStub;

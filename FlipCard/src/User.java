@@ -30,8 +30,7 @@ public class User {
 		 }
 	 }
 	 
-	 
-	 
+	
 	//사용자 본인 색상 가져오기
 	 public int GetMyColor() {
 		 return indexofColorID;
