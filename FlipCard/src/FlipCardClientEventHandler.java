@@ -18,11 +18,16 @@ import kr.ac.konkuk.ccslab.cm.info.CMInfo;
 import kr.ac.konkuk.ccslab.cm.info.CMInteractionInfo;
 import kr.ac.konkuk.ccslab.cm.stub.CMClientStub;
 
-public class ClientEventHandler implements CMAppEventHandler {
+public class FlipCardClientEventHandler implements CMAppEventHandler {
 	private CMClientStub m_clientStub;
 	private FlipCardClient m_client;
 	Maingame game = new Maingame();
 
+	public FlipCardClientEventHandler(CMClientStub stub)
+	{
+		m_clientStub = stub;
+	}
+	
 	public void getClientEventHandler(CMClientStub stub, FlipCardClient client) {
 		m_client = client;
 		m_clientStub = stub;
@@ -95,7 +100,8 @@ public class ClientEventHandler implements CMAppEventHandler {
 			// 클라측 이벤트 핸들러 중단
 		case "WIN":
 			// 채팅창에 표시
-
+		case "TIMER":
+			game.Timershow.setText(splitMsg[1]);
 		}
 
 	}

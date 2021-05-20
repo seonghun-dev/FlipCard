@@ -30,6 +30,8 @@ import javax.swing.event.ChangeListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
 
+import kr.ac.konkuk.ccslab.cm.stub.CMClientStub;
+
 import javax.swing.event.ChangeEvent;
 import java.awt.Toolkit;
 import java.util.Calendar;
@@ -53,7 +55,8 @@ public class Maingame extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	public JLabel Timershow;
-	public boolean startflag = false;
+	public boolean startflag = false; // 게임 진행
+	private CMClientStub m_clientStub;
 
 	public JButton[] CardArray = new JButton[16];
 	{
@@ -131,21 +134,7 @@ public class Maingame extends JFrame {
 
 		CardArray[0].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				switch (MyUser.GetMyColor()) {
-				case 1:
-					CardArray[0].setIcon(new ImageIcon("../FlipCard/Img/Cardusr1.png"));
-					break;
-				case 2:
-					CardArray[0].setIcon(new ImageIcon("../FlipCard/Img/Cardusr2.png"));
-					break;
-				case 3:
-					CardArray[0].setIcon(new ImageIcon("../FlipCard/Img/Cardusr3.png"));
-					break;
-				case 4:
-					CardArray[0].setIcon(new ImageIcon("../FlipCard/Img/Cardusr4.png"));
-					break;
-				}
-				sendColor(0,MyUser.GetMyColor());
+				ClickHandler(0);
 			}
 		});
 		CardArray[0].setBounds(12, 10, 97, 104);
@@ -153,21 +142,7 @@ public class Maingame extends JFrame {
 
 		CardArray[1].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				switch (MyUser.GetMyColor()) {
-				case 1:
-					CardArray[1].setIcon(new ImageIcon("../FlipCard/Img/Cardusr1.png"));
-					break;
-				case 2:
-					CardArray[1].setIcon(new ImageIcon("../FlipCard/Img/Cardusr2.png"));
-					break;
-				case 3:
-					CardArray[1].setIcon(new ImageIcon("../FlipCard/Img/Cardusr3.png"));
-					break;
-				case 4:
-					CardArray[1].setIcon(new ImageIcon("../FlipCard/Img/Cardusr4.png"));
-					break;
-				}
-				sendColor(0,MyUser.GetMyColor());
+				ClickHandler(1);
 			}
 		});
 		CardArray[1].setBounds(121, 10, 97, 104);
@@ -175,21 +150,7 @@ public class Maingame extends JFrame {
 
 		CardArray[2].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				switch (MyUser.GetMyColor()) {
-				case 1:
-					CardArray[2].setIcon(new ImageIcon("../FlipCard/Img/Cardusr1.png"));
-					break;
-				case 2:
-					CardArray[2].setIcon(new ImageIcon("../FlipCard/Img/Cardusr2.png"));
-					break;
-				case 3:
-					CardArray[2].setIcon(new ImageIcon("../FlipCard/Img/Cardusr3.png"));
-					break;
-				case 4:
-					CardArray[2].setIcon(new ImageIcon("../FlipCard/Img/Cardusr4.png"));
-					break;
-				}
-				sendColor(0,MyUser.GetMyColor());
+				ClickHandler(2);
 			}
 		});
 		CardArray[2].setBounds(230, 10, 97, 104);
@@ -197,21 +158,7 @@ public class Maingame extends JFrame {
 
 		CardArray[3].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				switch (MyUser.GetMyColor()) {
-				case 1:
-					CardArray[3].setIcon(new ImageIcon("../FlipCard/Img/Cardusr1.png"));
-					break;
-				case 2:
-					CardArray[3].setIcon(new ImageIcon("../FlipCard/Img/Cardusr2.png"));
-					break;
-				case 3:
-					CardArray[3].setIcon(new ImageIcon("../FlipCard/Img/Cardusr3.png"));
-					break;
-				case 4:
-					CardArray[3].setIcon(new ImageIcon("../FlipCard/Img/Cardusr4.png"));
-					break;
-				}
-				sendColor(0,MyUser.GetMyColor());
+				ClickHandler(3);
 			}
 		});
 		CardArray[3].setBounds(339, 10, 97, 104);
@@ -219,21 +166,7 @@ public class Maingame extends JFrame {
 
 		CardArray[4].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				switch (MyUser.GetMyColor()) {
-				case 1:
-					CardArray[4].setIcon(new ImageIcon("../FlipCard/Img/Cardusr1.png"));
-					break;
-				case 2:
-					CardArray[4].setIcon(new ImageIcon("../FlipCard/Img/Cardusr2.png"));
-					break;
-				case 3:
-					CardArray[4].setIcon(new ImageIcon("../FlipCard/Img/Cardusr3.png"));
-					break;
-				case 4:
-					CardArray[4].setIcon(new ImageIcon("../FlipCard/Img/Cardusr4.png"));
-					break;
-				}
-				sendColor(0,MyUser.GetMyColor());
+				ClickHandler(4);
 			}
 		});
 		CardArray[4].setBounds(12, 124, 97, 104);
@@ -241,21 +174,7 @@ public class Maingame extends JFrame {
 
 		CardArray[5].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				switch (MyUser.GetMyColor()) {
-				case 1:
-					CardArray[5].setIcon(new ImageIcon("../FlipCard/Img/Cardusr1.png"));
-					break;
-				case 2:
-					CardArray[5].setIcon(new ImageIcon("../FlipCard/Img/Cardusr2.png"));
-					break;
-				case 3:
-					CardArray[5].setIcon(new ImageIcon("../FlipCard/Img/Cardusr3.png"));
-					break;
-				case 4:
-					CardArray[5].setIcon(new ImageIcon("../FlipCard/Img/Cardusr4.png"));
-					break;
-				}
-				sendColor(0,MyUser.GetMyColor());
+				ClickHandler(5);
 			}
 		});
 		CardArray[5].setBounds(121, 124, 97, 104);
@@ -263,21 +182,7 @@ public class Maingame extends JFrame {
 
 		CardArray[6].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				switch (MyUser.GetMyColor()) {
-				case 1:
-					CardArray[6].setIcon(new ImageIcon("../FlipCard/Img/Cardusr1.png"));
-					break;
-				case 2:
-					CardArray[6].setIcon(new ImageIcon("../FlipCard/Img/Cardusr2.png"));
-					break;
-				case 3:
-					CardArray[6].setIcon(new ImageIcon("../FlipCard/Img/Cardusr3.png"));
-					break;
-				case 4:
-					CardArray[6].setIcon(new ImageIcon("../FlipCard/Img/Cardusr4.png"));
-					break;
-				}
-				sendColor(0,MyUser.GetMyColor());
+				ClickHandler(6);
 			}
 		});
 		CardArray[6].setBounds(230, 124, 97, 104);
@@ -285,21 +190,7 @@ public class Maingame extends JFrame {
 
 		CardArray[7].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				switch (MyUser.GetMyColor()) {
-				case 1:
-					CardArray[7].setIcon(new ImageIcon("../FlipCard/Img/Cardusr1.png"));
-					break;
-				case 2:
-					CardArray[7].setIcon(new ImageIcon("../FlipCard/Img/Cardusr2.png"));
-					break;
-				case 3:
-					CardArray[7].setIcon(new ImageIcon("../FlipCard/Img/Cardusr3.png"));
-					break;
-				case 4:
-					CardArray[7].setIcon(new ImageIcon("../FlipCard/Img/Cardusr4.png"));
-					break;
-				}
-				sendColor(0,MyUser.GetMyColor());
+				ClickHandler(7);
 			}
 		});
 		CardArray[7].setBounds(339, 124, 97, 104);
@@ -307,21 +198,7 @@ public class Maingame extends JFrame {
 
 		CardArray[8].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				switch (MyUser.GetMyColor()) {
-				case 1:
-					CardArray[8].setIcon(new ImageIcon("../FlipCard/Img/Cardusr1.png"));
-					break;
-				case 2:
-					CardArray[8].setIcon(new ImageIcon("../FlipCard/Img/Cardusr2.png"));
-					break;
-				case 3:
-					CardArray[8].setIcon(new ImageIcon("../FlipCard/Img/Cardusr3.png"));
-					break;
-				case 4:
-					CardArray[8].setIcon(new ImageIcon("../FlipCard/Img/Cardusr4.png"));
-					break;
-				}
-				sendColor(0,MyUser.GetMyColor());
+				ClickHandler(8);
 			}
 		});
 		CardArray[8].setBounds(12, 238, 97, 104);
@@ -329,21 +206,7 @@ public class Maingame extends JFrame {
 
 		CardArray[9].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				switch (MyUser.GetMyColor()) {
-				case 1:
-					CardArray[9].setIcon(new ImageIcon("../FlipCard/Img/Cardusr1.png"));
-					break;
-				case 2:
-					CardArray[9].setIcon(new ImageIcon("../FlipCard/Img/Cardusr2.png"));
-					break;
-				case 3:
-					CardArray[9].setIcon(new ImageIcon("../FlipCard/Img/Cardusr3.png"));
-					break;
-				case 4:
-					CardArray[9].setIcon(new ImageIcon("../FlipCard/Img/Cardusr4.png"));
-					break;
-				}
-				sendColor(0,MyUser.GetMyColor());
+				ClickHandler(9);
 			}
 		});
 		CardArray[9].setBounds(121, 238, 97, 104);
@@ -351,21 +214,7 @@ public class Maingame extends JFrame {
 
 		CardArray[10].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				switch (MyUser.GetMyColor()) {
-				case 1:
-					CardArray[10].setIcon(new ImageIcon("../FlipCard/Img/Cardusr1.png"));
-					break;
-				case 2:
-					CardArray[10].setIcon(new ImageIcon("../FlipCard/Img/Cardusr2.png"));
-					break;
-				case 3:
-					CardArray[10].setIcon(new ImageIcon("../FlipCard/Img/Cardusr3.png"));
-					break;
-				case 4:
-					CardArray[10].setIcon(new ImageIcon("../FlipCard/Img/Cardusr4.png"));
-					break;
-				}
-				sendColor(0,MyUser.GetMyColor());
+				ClickHandler(10);
 			}
 		});
 		CardArray[10].setBounds(230, 238, 97, 104);
@@ -374,21 +223,7 @@ public class Maingame extends JFrame {
 		// JButton CardArray[11] = new JButton("");
 		CardArray[11].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				switch (MyUser.GetMyColor()) {
-				case 1:
-					CardArray[11].setIcon(new ImageIcon("../FlipCard/Img/Cardusr1.png"));
-					break;
-				case 2:
-					CardArray[11].setIcon(new ImageIcon("../FlipCard/Img/Cardusr2.png"));
-					break;
-				case 3:
-					CardArray[11].setIcon(new ImageIcon("../FlipCard/Img/Cardusr3.png"));
-					break;
-				case 4:
-					CardArray[11].setIcon(new ImageIcon("../FlipCard/Img/Cardusr4.png"));
-					break;
-				}
-				sendColor(0,MyUser.GetMyColor());
+				ClickHandler(11);
 			}
 		});
 		CardArray[11].setBounds(339, 238, 97, 104);
@@ -397,21 +232,7 @@ public class Maingame extends JFrame {
 		// JButton CardArray[12] = new JButton("");
 		CardArray[12].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				switch (MyUser.GetMyColor()) {
-				case 1:
-					CardArray[12].setIcon(new ImageIcon("../FlipCard/Img/Cardusr1.png"));
-					break;
-				case 2:
-					CardArray[12].setIcon(new ImageIcon("../FlipCard/Img/Cardusr2.png"));
-					break;
-				case 3:
-					CardArray[12].setIcon(new ImageIcon("../FlipCard/Img/Cardusr3.png"));
-					break;
-				case 4:
-					CardArray[12].setIcon(new ImageIcon("../FlipCard/Img/Cardusr4.png"));
-					break;
-				}
-				sendColor(0,MyUser.GetMyColor());
+				ClickHandler(13);
 			}
 		});
 		CardArray[12].setBounds(12, 352, 97, 104);
@@ -420,21 +241,7 @@ public class Maingame extends JFrame {
 		// JButton CardArray[13] = new JButton("");
 		CardArray[13].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				switch (MyUser.GetMyColor()) {
-				case 1:
-					CardArray[13].setIcon(new ImageIcon("../FlipCard/Img/Cardusr1.png"));
-					break;
-				case 2:
-					CardArray[13].setIcon(new ImageIcon("../FlipCard/Img/Cardusr2.png"));
-					break;
-				case 3:
-					CardArray[13].setIcon(new ImageIcon("../FlipCard/Img/Cardusr3.png"));
-					break;
-				case 4:
-					CardArray[13].setIcon(new ImageIcon("../FlipCard/Img/Cardusr4.png"));
-					break;
-				}
-				sendColor(0,MyUser.GetMyColor());
+				ClickHandler(13);
 			}
 		});
 		CardArray[13].setBounds(121, 352, 97, 104);
@@ -442,21 +249,7 @@ public class Maingame extends JFrame {
 
 		CardArray[14].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				switch (MyUser.GetMyColor()) {
-				case 1:
-					CardArray[14].setIcon(new ImageIcon("../FlipCard/Img/Cardusr1.png"));
-					break;
-				case 2:
-					CardArray[14].setIcon(new ImageIcon("../FlipCard/Img/Cardusr2.png"));
-					break;
-				case 3:
-					CardArray[14].setIcon(new ImageIcon("../FlipCard/Img/Cardusr3.png"));
-					break;
-				case 4:
-					CardArray[14].setIcon(new ImageIcon("../FlipCard/Img/Cardusr4.png"));
-					break;
-				}
-				sendColor(0,MyUser.GetMyColor());
+				ClickHandler(14);
 			}
 		});
 		CardArray[14].setBounds(230, 352, 97, 104);
@@ -465,21 +258,7 @@ public class Maingame extends JFrame {
 		// JButton CardArray[15] = new JButton("");
 		CardArray[15].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				switch (MyUser.GetMyColor()) {
-				case 1:
-					CardArray[15].setIcon(new ImageIcon("../FlipCard/Img/Cardusr1.png"));
-					break;
-				case 2:
-					CardArray[15].setIcon(new ImageIcon("../FlipCard/Img/Cardusr2.png"));
-					break;
-				case 3:
-					CardArray[15].setIcon(new ImageIcon("../FlipCard/Img/Cardusr3.png"));
-					break;
-				case 4:
-					CardArray[15].setIcon(new ImageIcon("../FlipCard/Img/Cardusr4.png"));
-					break;
-				}
-				sendColor(0,MyUser.GetMyColor());
+				ClickHandler(15);
 			}
 		});
 		CardArray[15].setBounds(339, 352, 97, 104);
@@ -517,31 +296,17 @@ public class Maingame extends JFrame {
 		Timershow.setBounds(540, 187, 80, 20);
 		contentPane.add(Timershow);
 
-		Timer jobScheduler = new Timer();
-		TimerTask Timerjob = new TimerTask() {
-			int Timertime = 10;
-
-			@Override
-			public void run() {
-				String showTimertime = Integer.toString(Timertime);
-				if (Timertime > -1) {
-					Timershow.setText(showTimertime);
-					Timertime--;
-				} else {
-					init();
-				}
-			}
-		};
-		jobScheduler.scheduleAtFixedRate(Timerjob, 1000, 1000);
 
 	}
 
+	// 카드 값 초기화
 	public void init() {
 		for (int i = 0; i < 16; i++) {
 			CardArray[i].setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
 		}
 	}
 
+	// 서버에서 받아온 값 변화
 	public void ChangeColor(int Color, int Cardnum) {
 		if (startflag) {
 			switch (Color) {
@@ -560,10 +325,11 @@ public class Maingame extends JFrame {
 			}
 		}
 	}
-	
+
+	// 서버로 컬러값 보내주는 부분
 	public void sendColor(int Cardnum, int indexofColor) {
-		if(startflag) {
-			String Color="";
+		if (startflag) {
+			String Color = "";
 			switch (indexofColor) {
 			case 1:
 				Color = "BROWN";
@@ -579,8 +345,25 @@ public class Maingame extends JFrame {
 				break;
 			}
 			String result = "FLIP" + ";" + Integer.toString(Cardnum) + ";" + Color;
-			//이벤트 핸들러 불러아서 전송
 		}
+	}
+
+	public void ClickHandler(int Cardnum) {
+		switch (MyUser.GetMyColor()) {
+		case 1:
+			CardArray[Cardnum].setIcon(new ImageIcon("../FlipCard/Img/Cardusr1.png"));
+			break;
+		case 2:
+			CardArray[Cardnum].setIcon(new ImageIcon("../FlipCard/Img/Cardusr2.png"));
+			break;
+		case 3:
+			CardArray[Cardnum].setIcon(new ImageIcon("../FlipCard/Img/Cardusr3.png"));
+			break;
+		case 4:
+			CardArray[Cardnum].setIcon(new ImageIcon("../FlipCard/Img/Cardusr4.png"));
+			break;
+		}
+		sendColor(Cardnum, MyUser.GetMyColor());
 	}
 
 }

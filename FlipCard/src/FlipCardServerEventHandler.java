@@ -8,6 +8,7 @@ import kr.ac.konkuk.ccslab.cm.stub.CMServerStub;
 
 public class FlipCardServerEventHandler implements CMAppEventHandler {
    private CMServerStub m_serverStub;
+   private CardTimer timer;
    
    String [] color = {"BROWN", "BLUE", "PINK", "GREEN"}; // 사용자 카드 색
    HashMap<String, String> h = new HashMap<String, String>(); //key = 색깔, value = UserID -- hashmap 구현
@@ -51,6 +52,7 @@ public class FlipCardServerEventHandler implements CMAppEventHandler {
          }
          else
          {
+            System.out.println("연동이 됩니다잉");
             //로그인 허가
             m_serverStub.replyEvent(se, 1);   
             
@@ -94,6 +96,18 @@ public class FlipCardServerEventHandler implements CMAppEventHandler {
             due.setDummyInfo(msg); 
             m_serverStub.cast(due,null,null); 
             
+            //4번째 사용자인 경우를 확인하고, 타이머 한 2~3초 딜레이 후 게임 시작하게 끔
+            //타이머 시작하겠다는 채팅을 클라이언트 전체에 전달
+            //타이머 호출
+            if(m_serverStub.getLoginUsers().getMemberNum()==4) 
+            //지금 로그인 요청을 한 사용자를 포함하여 4명의 사용자가 모두 로그인했다면 타이머 실행
+            {
+               due.setDummyInfo("START");
+               m_serverStub.cast(due,null,null); //시작하겠다는 더미 이벤트를 클라이언트 전체에 전송
+               timer.run(); //타이머 스레드 실행
+            }
+            
+            
          }
          break;
       case CMSessionEvent.LOGOUT: //클라이언트가 로그아웃 요청 이벤트를 보낸 경우
@@ -135,7 +149,7 @@ public class FlipCardServerEventHandler implements CMAppEventHandler {
    
    }
 
-}
+}  
 
 
 
@@ -143,6 +157,7 @@ public class FlipCardServerEventHandler implements CMAppEventHandler {
 class CardTimer implements Runnable{
    private CMServerStub m_serverStub;
    CMDummyEvent due = new CMDummyEvent();
+   int i;
    
    public CardTimer(CMServerStub serverStub)
    {
@@ -155,11 +170,13 @@ class CardTimer implements Runnable{
       int t = 0;
       String msg = Integer.toString(t);
       
+      /*
       while(m_serverStub.getLoginUsers().getMemberNum()==4)
       {
          due.setDummyInfo("START");
          m_serverStub.cast(due,null,null); //클라이언트 게임 시작 메세지 전달
       }
+      */
       
       while(t<11) // 10초 타이머 시작
       {
@@ -168,7 +185,7 @@ class CardTimer implements Runnable{
          //시간을 알리는 더미이벤트 
          msg = Integer.toString(t);
          due.setDummyInfo("TIMER;"+msg);
-         m_serverStub.cast(due,null,null); 
+         m_serverStub.cast(due,null,null);  
          
          try{
             Thread.sleep(1000);
@@ -182,13 +199,13 @@ class CardTimer implements Runnable{
       m_serverStub.cast(due,null,null); //클라이언트 게임 종료 메세지 전달
       
       //10초가 끝난 후 우승자 알려주는 더미이벤트?
-      
+      for(i=0; i<16; i++) //카드 결과 계산
+      {
+         //switch-case문
+         
+      }
       
       return;
    }
    
 }
-
-
-
-
