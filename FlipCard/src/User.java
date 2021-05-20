@@ -1,4 +1,4 @@
-
+//User
 public class User {
 	public String Userinfo[] = new String[4]; // 유저배열
 	private static int indexofColorID=1; //현재사용자의 컬러값

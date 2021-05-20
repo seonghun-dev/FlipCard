@@ -1,3 +1,4 @@
+//Maingame
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.io.PrintWriter;
@@ -30,7 +31,9 @@ import javax.swing.event.ChangeListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
 
+import kr.ac.konkuk.ccslab.cm.event.CMDummyEvent;
 import kr.ac.konkuk.ccslab.cm.stub.CMClientStub;
+import kr.ac.konkuk.ccslab.cm.stub.CMServerStub;
 
 import javax.swing.event.ChangeEvent;
 import java.awt.Toolkit;
@@ -220,7 +223,7 @@ public class Maingame extends JFrame {
 		CardArray[10].setBounds(230, 238, 97, 104);
 		layeredPane.add(CardArray[10]);
 
-		// JButton CardArray[11] = new JButton("");
+
 		CardArray[11].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ClickHandler(11);
@@ -229,16 +232,16 @@ public class Maingame extends JFrame {
 		CardArray[11].setBounds(339, 238, 97, 104);
 		layeredPane.add(CardArray[11]);
 
-		// JButton CardArray[12] = new JButton("");
+		
 		CardArray[12].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ClickHandler(13);
+				ClickHandler(12);
 			}
 		});
 		CardArray[12].setBounds(12, 352, 97, 104);
 		layeredPane.add(CardArray[12]);
 
-		// JButton CardArray[13] = new JButton("");
+
 		CardArray[13].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ClickHandler(13);
@@ -255,7 +258,7 @@ public class Maingame extends JFrame {
 		CardArray[14].setBounds(230, 352, 97, 104);
 		layeredPane.add(CardArray[14]);
 
-		// JButton CardArray[15] = new JButton("");
+
 		CardArray[15].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ClickHandler(15);
@@ -264,6 +267,8 @@ public class Maingame extends JFrame {
 		CardArray[15].setBounds(339, 352, 97, 104);
 		layeredPane.add(CardArray[15]);
 
+		
+		//타이머 파트 시작
 		JLabel TimerText = new JLabel("Timer :");
 		TimerText.setEnabled(false);
 		TimerText.setForeground(new Color(0, 0, 0));
@@ -295,6 +300,8 @@ public class Maingame extends JFrame {
 		Timershow.setEnabled(false);
 		Timershow.setBounds(540, 187, 80, 20);
 		contentPane.add(Timershow);
+		
+		//타이머 파트 종료
 
 
 	}
@@ -306,6 +313,7 @@ public class Maingame extends JFrame {
 		}
 	}
 
+	
 	// 서버에서 받아온 값 변화
 	public void ChangeColor(int Color, int Cardnum) {
 		if (startflag) {
@@ -326,9 +334,10 @@ public class Maingame extends JFrame {
 		}
 	}
 
+	
 	// 서버로 컬러값 보내주는 부분
 	public void sendColor(int Cardnum, int indexofColor) {
-		if (startflag) {
+		//if (startflag) {
 			String Color = "";
 			switch (indexofColor) {
 			case 1:
@@ -344,10 +353,16 @@ public class Maingame extends JFrame {
 				Color = "GREEN";
 				break;
 			}
+			//서버에게 보내주는 부분
 			String result = "FLIP" + ";" + Integer.toString(Cardnum) + ";" + Color;
-		}
+			 CMDummyEvent due = new CMDummyEvent();
+			 due.setDummyInfo(result);
+			 m_clientStub.cast(due,null,null); 
+		//}
 	}
 
+	
+	//클릭했을때 사용자 색깔로 변경
 	public void ClickHandler(int Cardnum) {
 		switch (MyUser.GetMyColor()) {
 		case 1:

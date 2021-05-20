@@ -1,3 +1,4 @@
+//FlipCardServerEventHanlder
 import java.util.*;
 import kr.ac.konkuk.ccslab.cm.event.CMDummyEvent;
 import kr.ac.konkuk.ccslab.cm.event.CMEvent;
@@ -166,7 +167,10 @@ class CardTimer implements Runnable{
 
    @Override
    public void run() {
-   
+	   //테스트 용도
+	   due.setDummyInfo("TIMER;");
+	   m_serverStub.cast(due,null,null); 
+	   
       int t = 0;
       String msg = Integer.toString(t);
       
