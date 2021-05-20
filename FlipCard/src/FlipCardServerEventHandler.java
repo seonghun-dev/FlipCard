@@ -18,6 +18,7 @@ public class FlipCardServerEventHandler implements CMAppEventHandler {
    public FlipCardServerEventHandler(CMServerStub serverStub)
    {
       m_serverStub = serverStub;
+      
    }
    
    @Override
@@ -170,7 +171,6 @@ class CardTimer implements Runnable{
 	   //테스트 용도
 	   due.setDummyInfo("TIMER;");
 	   m_serverStub.cast(due,null,null); 
-	   
       int t = 0;
       String msg = Integer.toString(t);
       

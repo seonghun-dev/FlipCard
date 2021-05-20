@@ -30,6 +30,7 @@ public class FlipCardClient  {
 	{
 	   m_clientStub = new CMClientStub();
 	   m_eventHandler = new FlipCardClientEventHandler(m_clientStub);
+	   m_eventHandler = new FlipCardClientEventHandler(m_clientStub, this);
 	}
 
 	public CMClientStub getClientStub()
@@ -49,8 +50,8 @@ public class FlipCardClient  {
 	      cmStub.startCM();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-					Login window = new Login();
-					Login.main(args);
+	               Login window = new Login();
+	               window.frmFlipCard.setVisible(true);
 			}
 		});
 	}

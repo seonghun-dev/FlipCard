@@ -51,9 +51,9 @@ public class Login {
    
    public JFrame frmFlipCard;
    private JTextField username;
-   
-   boolean loginSendcheck = false;
-   
+   CMSessionEvent loginAckEvent=null; //
+   static boolean loginSendcheck = false;
+
    
    public CMClientStub getClientStub()
    {
@@ -68,7 +68,7 @@ public class Login {
    /**
     * Launch the application.
     */
-   public static void main(String[] args) {
+   /*public static void main(String[] args) {
       EventQueue.invokeLater(new Runnable() {
          public void run() {
             try {
@@ -87,6 +87,7 @@ public class Login {
    public Login() {
       m_clientStub = new CMClientStub();
       m_eventHandler = new FlipCardClientEventHandler(m_clientStub);
+      
       initialize();
    }
 
@@ -94,6 +95,7 @@ public class Login {
     * Initialize the contents of the frame.
     */
    private void initialize() {
+    
       frmFlipCard = new JFrame();
       frmFlipCard.setTitle("Flip Card");
       frmFlipCard.getContentPane().setBackground(Color.WHITE);
@@ -118,20 +120,21 @@ public class Login {
          public void actionPerformed(ActionEvent e) {
             String uname=username.getText();
               //String pass = "anypass";
-              loginSendcheck = m_clientStub.loginCM(uname, uname);
-              
+              //loginSendcheck = m_clientStub.loginCM(uname, uname);
+              loginAckEvent=m_clientStub.syncLoginCM(uname, "");//동기적으로 이벤트 받아옴
               //loginSendcheck - 로그인 요청을 잘 보냈을 경우 true, 아니면 false
               //이 변수 이용해서 로그인 요청 보냈는지 확인하는 구문
               
-              
+              //이걸 동기식으로 바꿀까?->바꿨어
+              //로그인 실패하면 어떡해?
               
             JOptionPane.showMessageDialog(frmFlipCard, "로그인이 완료되었습니다.");
             
-            //이벤트 핸들러 기다림
-            User getUsername =new User();
-            getUsername.GetMyuserColor(uname);
-            Maingame frame = new Maingame(); //maingame 창 띄움
-             frame.setVisible(true);
+            //이벤트 핸들러 기다림(?)
+           // User getUsername =new User();
+           // getUsername.GetMyuserColor(uname);
+            //Maingame frame = new Maingame(); //maingame 창 띄움
+             //frame.setVisible(true);
              frmFlipCard.setVisible(false); //Login창 닫음.
          }
       });

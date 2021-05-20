@@ -32,42 +32,57 @@ public class FlipCardClientEventHandler implements CMAppEventHandler {
 		m_client = client;
 		m_clientStub = stub;
 	}
+	
+	public FlipCardClientEventHandler(CMClientStub clientStub, FlipCardClient client)
+	{
+		m_client = client;
+		//m_outTextArea = textArea;
+		m_clientStub = clientStub;
 
+	}
+	
+	
+	
+	@Override
 	public void processEvent(CMEvent cme) {
 		// TODO Auto-generated method stub
 		// System.out.println("processEvent: Client app receives CM event!!");
 		switch (cme.getType()) {
 		case CMInfo.CM_DUMMY_EVENT:
-			ReceiveprocessDummyEvent(cme);
+			processDummyEvent(cme);
 			break;
 		case CMInfo.CM_SESSION_EVENT:
 			processSessionEvent(cme);
-
 		default:
 			break;
 		}
 	}
 
-	private void ReceiveprocessDummyEvent(CMEvent cme) {
+	private void processDummyEvent(CMEvent cme) {
 		CMDummyEvent cde = (CMDummyEvent) cme; // 서버에게서 받는
+		System.out.println("session("+cde.getHandlerSession()+"), group("+cde.getHandlerGroup()+")");  //테스트 구문
 		String message = cde.getDummyInfo();
 		String[] splitMsg = message.split(";");
 		String choice = splitMsg[0];
 		User MyUser = new User();
+		CMUser CUser=new CMUser();
 
 		switch (choice) {
 		case "LOGIN":
 			String UserID = splitMsg[1];
 			String Color = splitMsg[2];
-			FlipCardClient newgame = new FlipCardClient();
-			MyUser.ChangeCurrentUser(UserID, Color);
-			// newgame.FlipCardClientGame();
-			MyUser.GetMyuserColor(newgame.uname);
-			FlipCardClient changeflag = new FlipCardClient();
-			changeflag.openflag = true;
+			//FlipCardClient newgame = new FlipCardClient();
+	         MyUser.ChangeCurrentUser(UserID, Color);
+	         // newgame.FlipCardClientGame();
 
-			// 로그인창 닫기-연결만
-			// 메인게임 불러오기-연결만
+	         // 메인게임 불러오기-연결만
+	         if(UserID==CUser.getName()) {
+	            MyUser.GetMyuserColor(UserID);
+	            FlipCardClient changeflag = new FlipCardClient();
+	            changeflag.openflag = true;
+	            Maingame frame = new Maingame(); //maingame 창 띄움
+	                frame.setVisible(true);
+	         }
 
 		case "START":
 			game.init();
