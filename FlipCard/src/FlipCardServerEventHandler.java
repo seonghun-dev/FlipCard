@@ -18,9 +18,10 @@ public class FlipCardServerEventHandler implements CMAppEventHandler {
    public FlipCardServerEventHandler(CMServerStub serverStub)
    {
       m_serverStub = serverStub;
+      timer = new CardTimer(m_serverStub);
       
    }
-   
+
    @Override
    public void processEvent(CMEvent cme) {
       switch(cme.getType())
@@ -40,6 +41,7 @@ public class FlipCardServerEventHandler implements CMAppEventHandler {
       
       CMSessionEvent se = (CMSessionEvent) cme;
       CMDummyEvent due = new CMDummyEvent();
+      String msg;
             
       switch(se.getID())
       {
@@ -60,55 +62,59 @@ public class FlipCardServerEventHandler implements CMAppEventHandler {
             
             //카드색 배열과 해시맵 키 비교하여 없는 색과 사용자 매칭
             String loginUser = se.getUserName();
-            String loginColor = "";
-            int valid = 0;
-            
-            if(h.isEmpty()) // 첫번째 사용자일 경우 color 배열 중 첫번째 색 배정
-               loginColor = color[0];
+                      
+            if(h.isEmpty())
+            {
+               // 첫번째 사용자일 경우 color 배열 중 첫번째 색 배정
+               //loginColor = color[0];
+               //System.out.println("첫번째 사용자 정보 전송");
+               h.put(color[0], loginUser);
+               msg = "LOGIN;"+loginUser+";"+color[0];
+               due.setDummyInfo(msg);
+               m_serverStub.cast(due,  null,  null);
+               System.out.println("첫번째 사용자 정보 전송");
+            }
             else // 첫번째 사용자가 아닌 경우
             {
-               Set<String> keys = h.keySet();
-               Iterator<String> it = keys.iterator();
+               //Set<String> keys = h.keySet();
+               //Iterator<String> it = keys.iterator();
                
                for(int i=0; i<4; i++)
                {
-                  while(it.hasNext())
+                   Set<String> keys = h.keySet();
+                  if(keys.contains(color[i])) //i번째 color 값이 이미 해시맵에 있다면
                   {
-                     String key = it.next();
-                     if(color[i] == key)
-                     {
-                        String msg = "LOGIN;"+h.get(key)+";"+key;
-                        due.setDummyInfo(msg);
-                        m_serverStub.cast(due,null,null); //이전 사용자 정보 알리는 더미이벤트 발생
-                        valid = 1;
-                        break;
-                     }
+                     //이 색을 가진 사용자에 대한 정보를 cast
+                     msg = "LOGIN;"+h.get(color[i])+";"+color[i];
+                     due.setDummyInfo(msg);
+                     m_serverStub.cast(due,  null,  null); 
+                     System.out.println("기존 사용자 정보 전송");
                   }
-                  if(valid == 0) //valid 값이 바뀌지 않았으면, 0이면
+                  else //i번째 color 값이 해시맵에 없다면
                   {
-                     loginColor = color[i];
+                     System.out.println("신규 사용자 정보 전송");
+
+                     h.put(color[i],loginUser); //해시맵에 새로운 사용자 정보 추가
+                     
+                     //새로운 사용자 정보 cast
+                     msg = "LOGIN;"+h.get(color[i])+";"+color[i];
+                     due.setDummyInfo(msg);
+                     m_serverStub.cast(due,  null,  null);
                      break;
                   }
                }
             }
-            h.put(loginColor, loginUser);   
-            
-            //새로운 사용자가 로그인했다는 것을 다른 사용자들에게 알리는 더미이벤트 발생
-            String msg = "LOGIN;"+se.getUserName()+";"+loginColor;
-            due.setDummyInfo(msg); 
-            m_serverStub.cast(due,null,null); 
-            
+               
             //4번째 사용자인 경우를 확인하고, 타이머 한 2~3초 딜레이 후 게임 시작하게 끔
             //타이머 시작하겠다는 채팅을 클라이언트 전체에 전달
             //타이머 호출
-            if(m_serverStub.getLoginUsers().getMemberNum()==4) 
+            if(m_serverStub.getLoginUsers().getMemberNum()==1) 
             //지금 로그인 요청을 한 사용자를 포함하여 4명의 사용자가 모두 로그인했다면 타이머 실행
             {
                due.setDummyInfo("START");
                m_serverStub.cast(due,null,null); //시작하겠다는 더미 이벤트를 클라이언트 전체에 전송
                timer.run(); //타이머 스레드 실행
             }
-            
             
          }
          break;
@@ -168,10 +174,8 @@ class CardTimer implements Runnable{
 
    @Override
    public void run() {
-	   //테스트 용도
-	   due.setDummyInfo("TIMER;");
-	   m_serverStub.cast(due,null,null); 
-      int t = 0;
+
+      int t = 10;
       String msg = Integer.toString(t);
       
       /*
@@ -182,9 +186,9 @@ class CardTimer implements Runnable{
       }
       */
       
-      while(t<11) // 10초 타이머 시작
+      while(t>0) // 10초 타이머 시작
       {
-         t++;
+         t--;
          
          //시간을 알리는 더미이벤트 
          msg = Integer.toString(t);
@@ -201,13 +205,8 @@ class CardTimer implements Runnable{
       
       due.setDummyInfo("STOP");
       m_serverStub.cast(due,null,null); //클라이언트 게임 종료 메세지 전달
-      
-      //10초가 끝난 후 우승자 알려주는 더미이벤트?
-      for(i=0; i<16; i++) //카드 결과 계산
-      {
-         //switch-case문
-         
-      }
+     
+      //결과 계산 코드 추가 예정
       
       return;
    }

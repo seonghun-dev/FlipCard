@@ -1,5 +1,4 @@
-import java.awt.EventQueue;
-
+//Login
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -7,47 +6,16 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JPanel;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.SystemColor;
 import javax.swing.SwingConstants;
-import kr.ac.konkuk.ccslab.cm.stub.CMClientStub;
-import kr.ac.konkuk.ccslab.cm.entity.CMGroup;
-import kr.ac.konkuk.ccslab.cm.entity.CMGroupInfo;
-import kr.ac.konkuk.ccslab.cm.entity.CMList;
-import kr.ac.konkuk.ccslab.cm.entity.CMMember;
-import kr.ac.konkuk.ccslab.cm.entity.CMMessage;
-import kr.ac.konkuk.ccslab.cm.entity.CMPosition;
-import kr.ac.konkuk.ccslab.cm.entity.CMRecvFileInfo;
-import kr.ac.konkuk.ccslab.cm.entity.CMSendFileInfo;
-import kr.ac.konkuk.ccslab.cm.entity.CMServer;
-import kr.ac.konkuk.ccslab.cm.entity.CMSession;
-import kr.ac.konkuk.ccslab.cm.entity.CMSessionInfo;
-import kr.ac.konkuk.ccslab.cm.entity.CMUser;
-import kr.ac.konkuk.ccslab.cm.event.CMBlockingEventQueue;
-import kr.ac.konkuk.ccslab.cm.event.CMDummyEvent;
-import kr.ac.konkuk.ccslab.cm.event.CMEvent;
-import kr.ac.konkuk.ccslab.cm.event.CMFileEvent;
-import kr.ac.konkuk.ccslab.cm.event.CMInterestEvent;
 import kr.ac.konkuk.ccslab.cm.event.CMSessionEvent;
-import kr.ac.konkuk.ccslab.cm.event.CMUserEvent;
-import kr.ac.konkuk.ccslab.cm.info.CMCommInfo;
-import kr.ac.konkuk.ccslab.cm.info.CMConfigurationInfo;
-import kr.ac.konkuk.ccslab.cm.info.CMFileTransferInfo;
-import kr.ac.konkuk.ccslab.cm.info.CMInfo;
-import kr.ac.konkuk.ccslab.cm.info.CMInteractionInfo;
-import kr.ac.konkuk.ccslab.cm.manager.CMConfigurator;
-import kr.ac.konkuk.ccslab.cm.manager.CMEventManager;
-import kr.ac.konkuk.ccslab.cm.manager.CMFileTransferManager;
-import kr.ac.konkuk.ccslab.cm.manager.CMMqttManager;
-
 
 public class Login {
 
-   private CMClientStub m_clientStub;
-   private FlipCardClientEventHandler m_eventHandler;
+   FlipCardClient m_client;
    
    public JFrame frmFlipCard;
    private JTextField username;
@@ -55,39 +23,12 @@ public class Login {
    static boolean loginSendcheck = false;
 
    
-   public CMClientStub getClientStub()
-   {
-      return m_clientStub;
-   }
-   
-   public FlipCardClientEventHandler getClientEventHandler()
-   {
-      return m_eventHandler;
-   }
-
-   /**
-    * Launch the application.
-    */
-   /*public static void main(String[] args) {
-      EventQueue.invokeLater(new Runnable() {
-         public void run() {
-            try {
-               Login window = new Login();
-               window.frmFlipCard.setVisible(true);
-            } catch (Exception e) {
-               e.printStackTrace();
-            }
-         }
-      });
-   }
-
+  
    /**
     * Create the application.
     */
-   public Login() {
-      m_clientStub = new CMClientStub();
-      m_eventHandler = new FlipCardClientEventHandler(m_clientStub);
-      
+   public Login(FlipCardClient client) {
+     m_client = client;
       initialize();
    }
 
@@ -119,23 +60,12 @@ public class Login {
       btnLogin.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {
             String uname=username.getText();
-              //String pass = "anypass";
-              //loginSendcheck = m_clientStub.loginCM(uname, uname);
-              loginAckEvent=m_clientStub.syncLoginCM(uname, "");//동기적으로 이벤트 받아옴
-              //loginSendcheck - 로그인 요청을 잘 보냈을 경우 true, 아니면 false
-              //이 변수 이용해서 로그인 요청 보냈는지 확인하는 구문
-              
-              //이걸 동기식으로 바꿀까?->바꿨어
-              //로그인 실패하면 어떡해?
-              
+            User.myname =uname;
+              loginAckEvent=m_client.m_clientStub.syncLoginCM(uname, "");//동기적으로 이벤트 받아옴
+
             JOptionPane.showMessageDialog(frmFlipCard, "로그인이 완료되었습니다.");
-            
-            //이벤트 핸들러 기다림(?)
-           // User getUsername =new User();
-           // getUsername.GetMyuserColor(uname);
-            //Maingame frame = new Maingame(); //maingame 창 띄움
-             //frame.setVisible(true);
-             frmFlipCard.setVisible(false); //Login창 닫음.
+
+            frmFlipCard.setVisible(false); //Login창 닫음.
          }
       });
       btnLogin.setBounds(309, 391, 149, 45);
@@ -158,8 +88,4 @@ public class Login {
       return username.getText();
    }
 
-   public Object Login() {
-      // TODO Auto-generated method stub
-      return null;
-   }
 }

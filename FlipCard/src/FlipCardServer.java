@@ -1,12 +1,4 @@
-//import kr.ac.konkuk.ccslab.cm.*;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-
-import kr.ac.konkuk.ccslab.cm.manager.CMCommManager;
+//FlipCardServer
 import kr.ac.konkuk.ccslab.cm.stub.CMServerStub;
 
 public class FlipCardServer {
@@ -37,6 +29,5 @@ public class FlipCardServer {
        cmStub.startCM();
    } 
     
-	
+   
 }
-    

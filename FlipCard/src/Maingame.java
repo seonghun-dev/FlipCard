@@ -1,7 +1,5 @@
 //Maingame
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-import java.io.PrintWriter;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -10,57 +8,29 @@ import java.awt.Color;
 import javax.swing.JTextPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
-import java.awt.Component;
 import javax.swing.SwingConstants;
-import javax.swing.UIManager;
-import javax.swing.JSplitPane;
-import javax.swing.JToolBar;
-import java.awt.SystemColor;
 import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
-
-import java.awt.Canvas;
-import javax.swing.JProgressBar;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
-import javax.swing.event.ChangeListener;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.StyledDocument;
-
 import kr.ac.konkuk.ccslab.cm.event.CMDummyEvent;
 import kr.ac.konkuk.ccslab.cm.stub.CMClientStub;
-import kr.ac.konkuk.ccslab.cm.stub.CMServerStub;
-
-import javax.swing.event.ChangeEvent;
 import java.awt.Toolkit;
-import java.util.Calendar;
-import java.util.concurrent.TimeUnit;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.Checkbox;
-import javax.swing.JRadioButton;
-import javax.swing.JToggleButton;
-import javax.swing.JTree;
-import java.awt.List;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.ListSelectionModel;
-import java.util.Timer;
-import java.util.TimerTask;
-import javax.swing.JInternalFrame;
+
+
 
 public class Maingame extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
-	public JLabel Timershow;
+	public JLabel Timershow=new JLabel("ready");
 	public boolean startflag = false; // 게임 진행
-	private CMClientStub m_clientStub;
-
+	private CMClientStub m_clientStub=new CMClientStub();
+	private JLabel BrownUsr = new JLabel(User.Userinfo[0]);
+	private JLabel BlueUsr = new JLabel(User.Userinfo[1]);
+	private JLabel PinkUsr = new JLabel(User.Userinfo[2]);
+	private JLabel GreenUsr = new JLabel(User.Userinfo[3]);
 	public JButton[] CardArray = new JButton[16];
 	{
 		for (int i = 0; i < 16; i++) {
@@ -71,23 +41,7 @@ public class Maingame extends JFrame {
 		}
 
 	}
-
-	/**
-	 * Launch the application.
-
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Maingame frame = new Maingame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	 */
+	CMDummyEvent due = new CMDummyEvent();
 	User MyUser = new User();
 
 	/**
@@ -95,9 +49,6 @@ public class Maingame extends JFrame {
 	 */
 	public Maingame() {
 
-		MyUser.ChangeCurrentUser("테스트브라운", "BROWN");
-		MyUser.ChangeCurrentUser("테스트블루", "BLUE");
-		MyUser.GetMyuserColor("테스트블루");
 
 		setIconImage(Toolkit.getDefaultToolkit().getImage("../FlipCard/Img/icon.png"));
 		setFont(new Font("Brush Script MT", Font.PLAIN, 15));
@@ -110,22 +61,21 @@ public class Maingame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel BrownUsr = new JLabel(MyUser.Userinfo[0]);
 		BrownUsr.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		BrownUsr.setBounds(522, 60, 80, 20);
 		contentPane.add(BrownUsr);
 
-		JLabel BlueUsr = new JLabel(MyUser.Userinfo[1]);
+
 		BlueUsr.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		BlueUsr.setBounds(522, 84, 80, 20);
 		contentPane.add(BlueUsr);
 
-		JLabel PinkUsr = new JLabel(MyUser.Userinfo[2]);
+
 		PinkUsr.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		PinkUsr.setBounds(522, 107, 80, 20);
 		contentPane.add(PinkUsr);
 
-		JLabel GreenUsr = new JLabel(MyUser.Userinfo[3]);
+
 		GreenUsr.setFont(new Font("맑은 고딕", Font.PLAIN, 14));
 		GreenUsr.setBounds(522, 131, 80, 20);
 		contentPane.add(GreenUsr);
@@ -293,7 +243,7 @@ public class Maingame extends JFrame {
 		m_outTextPane.setBounds(472, 218, 286, 217);
 		contentPane.add(m_outTextPane);
 
-		JLabel Timershow = new JLabel("ready");
+		
 		Timershow.setFont(new Font("Showcard Gothic", Font.BOLD, 18));
 		Timershow.setHorizontalAlignment(SwingConstants.LEFT);
 		Timershow.setForeground(new Color(0, 0, 0));
@@ -301,9 +251,6 @@ public class Maingame extends JFrame {
 		Timershow.setBounds(540, 187, 80, 20);
 		contentPane.add(Timershow);
 		
-		//타이머 파트 종료
-
-
 	}
 
 	// 카드 값 초기화
@@ -337,7 +284,7 @@ public class Maingame extends JFrame {
 	
 	// 서버로 컬러값 보내주는 부분
 	public void sendColor(int Cardnum, int indexofColor) {
-		//if (startflag) {
+		if (startflag) {
 			String Color = "";
 			switch (indexofColor) {
 			case 1:
@@ -353,12 +300,11 @@ public class Maingame extends JFrame {
 				Color = "GREEN";
 				break;
 			}
-			//서버에게 보내주는 부분
+			// 서버에게 보내주는 부분
 			String result = "FLIP" + ";" + Integer.toString(Cardnum) + ";" + Color;
-			 CMDummyEvent due = new CMDummyEvent();
-			 due.setDummyInfo(result);
-			 m_clientStub.cast(due,null,null); 
-		//}
+			due.setDummyInfo(result);
+			m_clientStub.send(due,"SERVER"); 
+		}
 	}
 
 	
@@ -379,6 +325,14 @@ public class Maingame extends JFrame {
 			break;
 		}
 		sendColor(Cardnum, MyUser.GetMyColor());
+	}
+	
+	//사용자 정보 갱신
+	public void resettext() {
+		BrownUsr.setText(User.Userinfo[0]);
+		BlueUsr.setText(User.Userinfo[1]);
+		PinkUsr.setText(User.Userinfo[2]);
+		GreenUsr.setText(User.Userinfo[3]);
 	}
 
 }

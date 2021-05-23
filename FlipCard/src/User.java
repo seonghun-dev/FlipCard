@@ -1,12 +1,13 @@
 //User
 public class User {
-	public String Userinfo[] = new String[4]; // 유저배열
+	public static String Userinfo[] = new String[4]; // 유저배열
 	private static int indexofColorID=1; //현재사용자의 컬러값
+	public static String myname;
 
 	
 	 
 	 //현재 사용자 변경
-	 public void ChangeCurrentUser(String UserID,String Color) {
+	 public static void ChangeCurrentUser(String UserID,String Color) {
 		 switch (Color) {
          case "BROWN":  Userinfo[0]=UserID;
                   break;
@@ -19,6 +20,7 @@ public class User {
          }
 	 }
 	 
+
 	 
 	 //사용자 본인의 색상값 확인.
 	 public void GetMyuserColor(String UserID) {
@@ -35,5 +37,7 @@ public class User {
 	 public int GetMyColor() {
 		 return indexofColorID;
 	 }
+	 
+
 
 }
