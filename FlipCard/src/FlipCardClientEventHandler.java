@@ -103,8 +103,7 @@ public class FlipCardClientEventHandler implements CMAppEventHandler {
             game.startflag = false;// 클라측 이벤트 핸들러 중단
             game.init();// 카드 초기화
             
-            
-            
+
          case "WIN":
             // 채팅창에 표시
          case "TIMER":
