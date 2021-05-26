@@ -10,7 +10,7 @@ public class FlipCardClient  {
    String uname="";
    boolean openflag=false;
    
-   
+
    public FlipCardClient()
    {
       m_clientStub = new CMClientStub();
@@ -45,13 +45,6 @@ public class FlipCardClient  {
          
    }
    
-   public void printmessage(String message, String type) {
-      switch(type) {
-      case "Chat":
-      case "Winner":
-      }
-      
-   }
   
 
 }

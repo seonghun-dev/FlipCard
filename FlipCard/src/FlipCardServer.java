@@ -25,9 +25,10 @@ public class FlipCardServer {
     {   
        FlipCardServer srv = new FlipCardServer();   
        CMServerStub cmStub = srv.getServerStub();   
-       cmStub.setAppEventHandler(srv.getServerEventHandler());   
+       cmStub.setAppEventHandler(srv.getServerEventHandler());
        cmStub.startCM();
    } 
+   
     
    
 }
