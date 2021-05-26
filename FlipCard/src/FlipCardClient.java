@@ -30,6 +30,7 @@ public class FlipCardClient {
 		cmStub.setAppEventHandler(client.getClientEventHandler());
 		cmStub.startCM();
 		Login window = new Login(client);
+		window.frmFlipCard.setLocationRelativeTo(null);
 		window.frmFlipCard.setVisible(true);
 	}
 

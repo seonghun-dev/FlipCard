@@ -174,15 +174,15 @@ public class FlipCardServerEventHandler implements CMAppEventHandler {
 		@Override
 		public void run() {
 
-			System.out.println("작업스레드 이름 : " + Thread.currentThread().getName());
+			
 			// 테스트 용도
-			int t = 11;
+			int t = 30;
 			String msg = Integer.toString(t);
 
 			while (t > 0) // 10초 타이머 시작
 			{
 				t--;
-
+				System.out.println("작업스레드 이름 : " + Thread.currentThread().getName());
 				// 시간을 알리는 더미이벤트
 				msg = Integer.toString(t);
 				due.setDummyInfo("TIMER;" + msg);

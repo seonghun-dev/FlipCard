@@ -36,7 +36,7 @@ public class Nextgame extends JDialog {
 		ResultLabel.setBounds(12, 10, 410, 191);
 		contentPanel.add(ResultLabel);
 
-		JButton Shutdown = new JButton("나가기");
+		JButton Shutdown = new JButton("");
 		Shutdown.setIcon(new ImageIcon("D:\\Documnet\\logout.png"));
 		Shutdown.setBackground(Color.LIGHT_GRAY);
 		Shutdown.addActionListener(new ActionListener() {

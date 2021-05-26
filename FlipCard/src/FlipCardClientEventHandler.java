@@ -1,5 +1,6 @@
 
 //FlipCardClientEventHandler 재생성
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 
 import kr.ac.konkuk.ccslab.cm.event.CMDummyEvent;
@@ -77,6 +78,7 @@ public class FlipCardClientEventHandler implements CMAppEventHandler {
 				System.out.println("루프 들어감");
 				MyUser.GetMyuserColor(UserID);
 				m_client.openflag = true;
+				game.setLocationRelativeTo(null);
 				game.setVisible(true); // 메인게임 화면 시작
 			}
 			break;
@@ -102,7 +104,7 @@ public class FlipCardClientEventHandler implements CMAppEventHandler {
 				Color1 = 4;
 				break;
 			}
-			game.ChangeColor(Color1, Integer.parseInt(splitMsg[1]));
+			ChangeColor(Color1, Integer.parseInt(splitMsg[1]));
 			// 카드 변경
 		case "STOP":
 			Maingame.startflag = false;
@@ -118,6 +120,7 @@ public class FlipCardClientEventHandler implements CMAppEventHandler {
 
 				isregame.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 				isregame.ShowWinner(2);
+				isregame.setLocationRelativeTo(null);
 				isregame.setVisible(true);
 				while (!isregame.regame) {
 				}
@@ -130,6 +133,30 @@ public class FlipCardClientEventHandler implements CMAppEventHandler {
 
 		}
 
+	}
+	
+	// 서버에서 받아온 값 변화
+	public void ChangeColor(int Cardnum, int Color) {
+		switch (Color) {
+		case 1:
+			game.CardArray[Cardnum].setIcon(new ImageIcon("../FlipCard/Img/Cardusr1.png"));
+			break;
+		case 2:
+			game.CardArray[Cardnum].setIcon(new ImageIcon("../FlipCard/Img/Cardusr2.png"));
+			break;
+		case 3:
+			game.CardArray[Cardnum].setIcon(new ImageIcon("../FlipCard/Img/Cardusr3.png"));
+			break;
+		case 4:
+			game.CardArray[Cardnum].setIcon(new ImageIcon("../FlipCard/Img/Cardusr4.png"));
+			break;
+		default:
+			game.CardArray[Cardnum].setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
+			break;
+		}
+		game.printMessage("변경");
+		game.printMessage(Integer.toString(Color));
+		game.printMessage(Integer.toString(Cardnum)+"\n");
 	}
 
 }
