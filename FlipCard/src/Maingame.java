@@ -27,7 +27,7 @@ import javax.swing.JScrollPane;
 public class Maingame extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
-	public static JLabel Timershow = new JLabel("ready");
+	public  JLabel Timershow = new JLabel("ready");
 	public static boolean startflag = false; // 게임 진행
 	JTextPane m_outTextPane = new JTextPane();
 

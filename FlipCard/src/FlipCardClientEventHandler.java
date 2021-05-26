@@ -40,6 +40,9 @@ public class FlipCardClientEventHandler implements CMAppEventHandler {
 		switch (se.getID()) {
 		case CMSessionEvent.LOGIN_ACK:
 			System.out.println("로그인 인증 받았음");
+			m_client.openflag = true;
+			game.setLocationRelativeTo(null);
+			game.setVisible(true); // 메인게임 화면 시작
 			// Login 클래스에서 다음 "로그인 완료되었습니다." 메세지 출력된다.
 			// 비동기식으로 구현했음
 			break;
@@ -75,11 +78,7 @@ public class FlipCardClientEventHandler implements CMAppEventHandler {
 
 			// 메인게임 불러오기-연결만
 			if (UserID.equals(User.myname)) {
-				System.out.println("루프 들어감");
 				MyUser.GetMyuserColor(UserID);
-				m_client.openflag = true;
-				game.setLocationRelativeTo(null);
-				game.setVisible(true); // 메인게임 화면 시작
 			}
 			break;
 		case "START":

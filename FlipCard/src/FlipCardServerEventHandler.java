@@ -15,7 +15,8 @@ public class FlipCardServerEventHandler implements CMAppEventHandler {
 	String[] color = { "BROWN", "BLUE", "PINK", "GREEN" }; // 사용자 카드 색
 	HashMap<String, String> h = new HashMap<String, String>(); // key = 색깔, value = UserID -- hashmap 구현
 	String card[] = new String[16]; // 카드 번호 별 카드 색
-
+	private static int Membernum=0; 
+	
 	public FlipCardServerEventHandler(CMServerStub serverStub) {
 		m_serverStub = serverStub;
 		timer = new CardTimer(m_serverStub, this);
@@ -45,56 +46,36 @@ public class FlipCardServerEventHandler implements CMAppEventHandler {
 		case CMSessionEvent.LOGIN: // 클라이언트가 로그인 요청 이벤트를 보낸 경우
 
 			// 사용자 인증 진행하고, (DBManager 안쓸거임)
-			if (m_serverStub.getLoginUsers().getMemberNum() > 4)// 4명 초과이면 로그인 실패
+			if (Membernum> 4)// 4명 초과이면 로그인 실패
 			{
 				// 사용자 정원 초과 메세지
 				System.out.println("정원 초과로 인한 로그인 거부 : " + se.getUserName());
 				m_serverStub.replyEvent(se, 0);
+				break;
 			} else {
-				System.out.println("연동이 됩니다잉");
-				// 로그인 허가
+				System.out.println("로그인 허가"); // 로그인 허가
 				m_serverStub.replyEvent(se, 1);
 
 				// 카드색 배열과 해시맵 키 비교하여 없는 색과 사용자 매칭
 				String loginUser = se.getUserName();
-
-				if (h.isEmpty()) {
-					// 첫번째 사용자일 경우 color 배열 중 첫번째 색 배정
-					System.out.println("첫번째 사용자 정보 전송");
-					h.put(color[0], loginUser);
-					msg = "LOGIN;" + loginUser + ";" + color[0];
+				Membernum= 0;
+				Set<String> keys = h.keySet();
+				while (keys.contains(color[Membernum])) {
+					System.out.println("기존 사용자 정보 전송");
+					msg = "LOGIN;" + h.get(color[Membernum]) + ";" + color[Membernum]; // 이 색을 가진 사용자에 대한 정보를 cast
 					due.setDummyInfo(msg);
 					m_serverStub.cast(due, null, null);
-				} else // 첫번째 사용자가 아닌 경우
-				{
-					for (int i = 0; i < 4; i++) {
-						Set<String> keys = h.keySet();
-						if (keys.contains(color[i])) // i번째 color 값이 이미 해시맵에 있다면
-						{
-							System.out.println("기존 사용자 정보 전송");
-							// 이 색을 가진 사용자에 대한 정보를 cast
-							msg = "LOGIN;" + h.get(color[i]) + ";" + color[i];
-							due.setDummyInfo(msg);
-							m_serverStub.cast(due, null, null);
-						} else // i번째 color 값이 해시맵에 없다면
-						{
-							System.out.println("신규 사용자 정보 전송");
-
-							h.put(color[i], loginUser); // 해시맵에 새로운 사용자 정보 추가
-
-							// 새로운 사용자 정보 cast
-							msg = "LOGIN;" + h.get(color[i]) + ";" + color[i];
-							due.setDummyInfo(msg);
-							m_serverStub.cast(due, null, null);
-							break;
-						}
-					}
+					Membernum++;
 				}
-
-				if (m_serverStub.getLoginUsers().getMemberNum() == 2) // 지금 로그인 요청을 한 사용자를 포함하여 4명의 사용자가 모두 로그인했다면 타이머
-																		// 실행
-				{
-					due.setDummyInfo("START");
+				// i번째 color 값이 해시맵에 없다면
+				System.out.println("신규 사용자 정보 전송");
+				h.put(color[Membernum], loginUser); // 해시맵에 새로운 사용자 정보 추가
+				msg = "LOGIN;" + h.get(color[Membernum]) + ";" + color[Membernum];
+				due.setDummyInfo(msg);
+				m_serverStub.cast(due, null, null);// 새로운 사용자 정보 cast
+				if (Membernum == 4) {// 지금 로그인 요청을 한 사용자를 포함하여 4명의 사용자가 모두 로그인했다면 타이머
+					Membernum++;
+					due.setDummyInfo("START");// 실행
 					m_serverStub.cast(due, null, null); // 시작하겠다는 더미 이벤트를 클라이언트 전체에 전송
 					timer.start();
 				}
@@ -115,18 +96,13 @@ public class FlipCardServerEventHandler implements CMAppEventHandler {
 				}
 			}
 			for (int i = 0; i < 4; i++) {
-
 				if (keys.contains(color[i])) // i번째 color 값이 이미 해시맵에 있다면
 				{
-					System.out.println("기존 사용자 정보 전송");
-					// 이 색을 가진 사용자에 대한 정보를 cast
 					msg = "LOGIN;" + h.get(color[i]) + ";" + color[i];
 					due.setDummyInfo(msg);
 					m_serverStub.cast(due, null, null);
 				} else // i번째 color 값이 해시맵에 없다면
 				{
-					System.out.println("신규 사용자 정보 전송");
-
 					// 새로운 사용자 정보 cast
 					msg = "LOGIN;" + "" + ";" + color[i];
 					due.setDummyInfo(msg);
@@ -138,7 +114,6 @@ public class FlipCardServerEventHandler implements CMAppEventHandler {
 		default:
 			return;
 		}
-
 	}
 
 	private void processDummyEvent(CMEvent cme) {
@@ -146,7 +121,7 @@ public class FlipCardServerEventHandler implements CMAppEventHandler {
 		CMDummyEvent du = (CMDummyEvent) cme; // 받는
 		CMDummyEvent due = new CMDummyEvent(); // 주는
 
-		System.out.println("작업스레드 이름 : " + Thread.currentThread().getName());
+		System.out.println("작업스레드 이름 : " + Thread.currentThread().getName() + System.currentTimeMillis());
 		// 게임 도중 클라이언트가 카드를 클릭했을 경우
 		String recv = du.getDummyInfo();
 		String s[] = recv.split(";");
@@ -174,7 +149,6 @@ public class FlipCardServerEventHandler implements CMAppEventHandler {
 		@Override
 		public void run() {
 
-			
 			// 테스트 용도
 			int t = 30;
 			String msg = Integer.toString(t);
@@ -182,7 +156,7 @@ public class FlipCardServerEventHandler implements CMAppEventHandler {
 			while (t > 0) // 10초 타이머 시작
 			{
 				t--;
-				System.out.println("작업스레드 이름 : " + Thread.currentThread().getName());
+				System.out.println("작업스레드 이름 : " + Thread.currentThread().getName() + System.currentTimeMillis());
 				// 시간을 알리는 더미이벤트
 				msg = Integer.toString(t);
 				due.setDummyInfo("TIMER;" + msg);

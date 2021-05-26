@@ -74,6 +74,10 @@ public class Login {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String uname = username.getText();
+				if(uname.length() == 0) {
+					JOptionPane.showMessageDialog(frmFlipCard, "빈 문자열은 입력하실 수 없습니다.", null, JOptionPane.ERROR_MESSAGE);
+					return;
+				}
 				User.myname = uname;
 				try {
 					loginAckEvent = m_client.m_clientStub.syncLoginCM(uname, "");
@@ -81,18 +85,6 @@ public class Login {
 					JOptionPane.showMessageDialog(frmFlipCard, "로그인이 실패", null, JOptionPane.ERROR_MESSAGE);
 				}
 				JOptionPane.showMessageDialog(frmFlipCard, "로그인이 완료되었습니다.");
-
-				// loginSendcheck - 로그인 요청을 잘 보냈을 경우 true, 아니면 false
-				// 이 변수 이용해서 로그인 요청 보냈는지 확인하는 구문
-
-				// 이걸 동기식으로 바꿀까?->바꿨어
-				// 로그인 실패하면 어떡해?
-
-				// 이벤트 핸들러 기다림(?)
-				// User getUsername =new User();
-				// getUsername.GetMyuserColor(uname);
-				// Maingame frame = new Maingame(); //maingame 창 띄움
-				// frame.setVisible(true);
 				frmFlipCard.setVisible(false); // Login창 닫음.
 			}
 		});
