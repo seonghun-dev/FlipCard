@@ -17,7 +17,6 @@ public class Nextgame extends JDialog {
 	public JLabel ResultLabel = new JLabel("");
 	private final JButton Replaybtn = new JButton("");
 	public boolean regame = false;
-		
 
 	/**
 	 * Create the dialog.
@@ -32,11 +31,11 @@ public class Nextgame extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		ResultLabel.setIcon(new ImageIcon("C:\\Users\\seong\\Desktop\\win_blue.png"));
-		
+
 		ResultLabel.setBackground(Color.DARK_GRAY);
 		ResultLabel.setBounds(12, 10, 410, 191);
 		contentPanel.add(ResultLabel);
-		
+
 		JButton Shutdown = new JButton("나가기");
 		Shutdown.setIcon(new ImageIcon("D:\\Documnet\\logout.png"));
 		Shutdown.setBackground(Color.LIGHT_GRAY);
@@ -46,20 +45,17 @@ public class Nextgame extends JDialog {
 			}
 		});
 		Shutdown.setBounds(12, 200, 98, 40);
-		
-		
-		
-		
+
 		contentPanel.add(Shutdown);
 		Replaybtn.setIcon(new ImageIcon("D:\\Documnet\\Replay.png"));
 		Replaybtn.setBackground(Color.LIGHT_GRAY);
 		Replaybtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				regame=true;
+				regame = true;
 			}
 		});
 		Replaybtn.setBounds(108, 200, 314, 40);
-		
+
 		contentPanel.add(Replaybtn);
 		{
 			{
@@ -68,22 +64,20 @@ public class Nextgame extends JDialog {
 		}
 	}
 
-
-
-public void ShowWinner(int winnernum) {
-    switch (winnernum) {
-    case 1:
-    	ResultLabel.setIcon(new ImageIcon("../FlipCard/Img/win_brown.png"));
-       break;
-    case 2:
-    	ResultLabel.setIcon(new ImageIcon("../FlipCard/Img/win_blue.png"));
-       break;
-    case 3:
-    	ResultLabel.setIcon(new ImageIcon("../FlipCard/Img/win_pink.png"));
-       break;
-    case 4:
-    	ResultLabel.setIcon(new ImageIcon("../FlipCard/Img/win_green.png"));
-       break;
-    }
- }
+	public void ShowWinner(int winnernum) {
+		switch (winnernum) {
+		case 1:
+			ResultLabel.setIcon(new ImageIcon("../FlipCard/Img/win_brown.png"));
+			break;
+		case 2:
+			ResultLabel.setIcon(new ImageIcon("../FlipCard/Img/win_blue.png"));
+			break;
+		case 3:
+			ResultLabel.setIcon(new ImageIcon("../FlipCard/Img/win_pink.png"));
+			break;
+		case 4:
+			ResultLabel.setIcon(new ImageIcon("../FlipCard/Img/win_green.png"));
+			break;
+		}
+	}
 }
