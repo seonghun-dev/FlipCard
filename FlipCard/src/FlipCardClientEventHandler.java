@@ -84,7 +84,7 @@ public class FlipCardClientEventHandler implements CMAppEventHandler {
 		case "START":
 			game.printMessage("[공지] 게임이 곧 시작합니다. \n");
 			game.init(); // 카드 초기화
-			Maingame.startflag = true;
+			game.setstartflag(true);
 			break;
 		case "FLIP":
 			game.printMessage("메세지 받음");
@@ -106,13 +106,13 @@ public class FlipCardClientEventHandler implements CMAppEventHandler {
 			ChangeColor(Color1, Integer.parseInt(splitMsg[1]));
 			// 카드 변경
 		case "STOP":
-			Maingame.startflag = false;
+			game.setstartflag(false);
 			game.init();
 			// 시간 0초로 보여짐
 			// 카드 초기화
 			// 클라측 이벤트 핸들러 중단
 		case "TIMER":
-			if (game.startflag) {
+			if (game.getstartflag()) {
 				game.Timershow.setText(splitMsg[1]);
 			}
 			if (Integer.parseInt(splitMsg[1]) == 0) {

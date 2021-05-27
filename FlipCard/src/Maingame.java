@@ -6,6 +6,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
 import javax.swing.JTextField;
+
+import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JTextPane;
 import javax.swing.JButton;
@@ -27,8 +29,8 @@ import javax.swing.JScrollPane;
 public class Maingame extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
-	public  JLabel Timershow = new JLabel("ready");
-	public static boolean startflag = false; // 게임 진행
+	public JLabel Timershow = new JLabel("ready");
+	private static boolean startflag = false; // 게임 진행
 	JTextPane m_outTextPane = new JTextPane();
 
 	FlipCardClient m_client;
@@ -232,14 +234,14 @@ public class Maingame extends JFrame {
 		});
 		CardArray[15].setBounds(339, 352, 97, 104);
 		layeredPane.add(CardArray[15]);
-		
-		//사용자 정보
+
+		// 사용자 정보
 		JLabel Usrbackground = new JLabel("");
 		Usrbackground.setIcon(new ImageIcon("../FlipCard/Img/usrbackground.png"));
 		Usrbackground.setBounds(472, 23, 286, 153);
 		contentPane.add(Usrbackground);
-		
-		//채팅창
+
+		// 채팅창
 		m_outTextPane.setEditable(false);
 		m_outTextPane.setBackground(new Color(245, 245, 245));
 		m_outTextPane.setBounds(472, 218, 286, 217);
@@ -248,8 +250,8 @@ public class Maingame extends JFrame {
 		JScrollPane scrollPane = new JScrollPane(m_outTextPane);
 		scrollPane.setBounds(472, 218, 286, 217);
 		contentPane.add(scrollPane);
-		
-		//채팅창 입력
+
+		// 채팅창 입력
 		textField = new JTextField();
 		textField.addKeyListener(new KeyAdapter() {
 			@Override
@@ -273,16 +275,14 @@ public class Maingame extends JFrame {
 		TimerText.setFont(new Font("Showcard Gothic", Font.PLAIN, 18));
 		TimerText.setBounds(472, 186, 71, 23);
 		contentPane.add(TimerText);
-		
-		//타이머-시간 표시
+
+		// 타이머-시간 표시
 		Timershow.setFont(new Font("Showcard Gothic", Font.BOLD, 18));
 		Timershow.setHorizontalAlignment(SwingConstants.LEFT);
 		Timershow.setForeground(new Color(0, 0, 0));
 		Timershow.setEnabled(false);
 		Timershow.setBounds(540, 187, 80, 20);
 		contentPane.add(Timershow);
-		
-
 	}
 
 	// 카드 값 초기화
@@ -291,10 +291,9 @@ public class Maingame extends JFrame {
 			CardArray[i].setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
 		}
 	}
-/*
+
 	// 서버에서 받아온 값 변화
 	public void ChangeColor(int Cardnum, int Color) {
-		printMessage(Integer.toString(test)+"\n");
 		switch (Color) {
 		case 1:
 			CardArray[Cardnum].setIcon(new ImageIcon("../FlipCard/Img/Cardusr1.png"));
@@ -315,9 +314,8 @@ public class Maingame extends JFrame {
 		printMessage("변경");
 		printMessage(Integer.toString(Color));
 		printMessage(Integer.toString(Cardnum));
-		test++;
 	}
-*/
+
 	// 서버로 컬러값 보내주는 부분
 	public void sendColor(int Cardnum, int indexofColor) {
 		String Color = "";
@@ -370,7 +368,7 @@ public class Maingame extends JFrame {
 		GreenUsr.setText(User.Userinfo[3]);
 	}
 
-	//채팅창 입력 내용 전송
+	// 채팅창 입력 내용 전송
 	public void inputMsg() {
 		String strText = textField.getText();
 		printMessage("[" + MyUser.GetMyname() + "]" + strText + "\n");
@@ -378,7 +376,7 @@ public class Maingame extends JFrame {
 		textField.requestFocus();
 	}
 
-	//채팅창 입력내용 표시
+	// 채팅창 입력내용 표시
 	public void printMessage(String strText) {
 		StyledDocument doc = m_outTextPane.getStyledDocument();
 		try {
@@ -390,4 +388,13 @@ public class Maingame extends JFrame {
 		}
 		return;
 	}
+	
+	public void setstartflag(boolean state) {
+		startflag = state;
+	}
+	public boolean getstartflag() {
+		return startflag;
+	}
+	
+	
 }

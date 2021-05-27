@@ -1,4 +1,3 @@
-
 //FlipCardServerEventHandler
 import java.util.*;
 import kr.ac.konkuk.ccslab.cm.event.CMDummyEvent;
@@ -243,31 +242,3 @@ public class FlipCardServerEventHandler implements CMAppEventHandler {
 	}
 
 }
-
-/*
- * class CardTimer implements Runnable{ private CMServerStub m_serverStub;
- * CMDummyEvent due = new CMDummyEvent(); int i;
- * 
- * public CardTimer(CMServerStub serverStub) { m_serverStub = serverStub; }
- * 
- * @Override public void run() { //테스트 용도 int t = 11; String msg =
- * Integer.toString(t);
- * 
- * while(t>0) // 10초 타이머 시작 { t--;
- * 
- * //시간을 알리는 더미이벤트 msg = Integer.toString(t); due.setDummyInfo("TIMER;"+msg);
- * m_serverStub.cast(due,null,null);
- * 
- * System.out.println(msg);
- * 
- * try{ Thread.sleep(1000); } catch(InterruptedException e) { return; } }
- * 
- * due.setDummyInfo("STOP"); m_serverStub.cast(due,null,null); //클라이언트 게임 종료 메세지
- * 전달
- * 
- * //결과 계산 코드 추가 예정
- * 
- * return; }
- * 
- * }
- */
