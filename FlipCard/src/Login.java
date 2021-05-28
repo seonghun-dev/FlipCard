@@ -1,3 +1,4 @@
+
 //Login
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,8 +24,8 @@ public class Login {
 
 	public JFrame frmFlipCard;
 	private JTextField username;
-	
-	CMSessionEvent loginAckEvent = null; 
+
+	CMSessionEvent loginAckEvent = null;
 	JButton btnLogin = new JButton("Login");
 
 	/**
@@ -73,7 +74,7 @@ public class Login {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String uname = username.getText();
-				if(uname.length() == 0) {
+				if (uname.length() == 0) {
 					JOptionPane.showMessageDialog(frmFlipCard, "빈 문자열은 입력하실 수 없습니다.", null, JOptionPane.ERROR_MESSAGE);
 					return;
 				}

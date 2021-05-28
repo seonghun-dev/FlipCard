@@ -1,8 +1,8 @@
+
 /**Nextgame
  *This Class Means Nextgame
  *
  */
-
 
 import java.awt.BorderLayout;
 import java.awt.Toolkit;

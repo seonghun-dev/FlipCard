@@ -1,3 +1,4 @@
+
 //FlipCardServerEventHandler
 import java.util.*;
 import kr.ac.konkuk.ccslab.cm.event.CMDummyEvent;
@@ -14,8 +15,8 @@ public class FlipCardServerEventHandler implements CMAppEventHandler {
 	String[] color = { "BROWN", "BLUE", "PINK", "GREEN" }; // 사용자 카드 색
 	HashMap<String, String> h = new HashMap<String, String>(); // key = 색깔, value = UserID -- hashmap 구현
 	String card[] = new String[16]; // 카드 번호 별 카드 색
-	private static int Membernum=0; 
-	
+	private static int Membernum = 0;
+
 	public FlipCardServerEventHandler(CMServerStub serverStub) {
 		m_serverStub = serverStub;
 		timer = new CardTimer(m_serverStub, this);
@@ -45,7 +46,7 @@ public class FlipCardServerEventHandler implements CMAppEventHandler {
 		case CMSessionEvent.LOGIN: // 클라이언트가 로그인 요청 이벤트를 보낸 경우
 
 			// 사용자 인증 진행하고, (DBManager 안쓸거임)
-			if (Membernum> 4)// 4명 초과이면 로그인 실패
+			if (Membernum > 4)// 4명 초과이면 로그인 실패
 			{
 				// 사용자 정원 초과 메세지
 				System.out.println("정원 초과로 인한 로그인 거부 : " + se.getUserName());
@@ -57,7 +58,7 @@ public class FlipCardServerEventHandler implements CMAppEventHandler {
 
 				// 카드색 배열과 해시맵 키 비교하여 없는 색과 사용자 매칭
 				String loginUser = se.getUserName();
-				Membernum= 0;
+				Membernum = 0;
 				Set<String> keys = h.keySet();
 				while (keys.contains(color[Membernum])) {
 					System.out.println("기존 사용자 정보 전송");
@@ -145,12 +146,12 @@ public class FlipCardServerEventHandler implements CMAppEventHandler {
 
 		@Override
 		public void run() {
-			
+
 			due.setDummyInfo("READY");// 대기
 			m_serverStub.cast(due, null, null); // 대기하겠다는 더미 이벤트를 클라이언트 전체에 전송
-			
+
 			// 대기 상태
-			
+
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e1) {
@@ -160,18 +161,17 @@ public class FlipCardServerEventHandler implements CMAppEventHandler {
 
 			due.setDummyInfo("START");// 실행
 			m_serverStub.cast(due, null, null); // 시작하겠다는 더미 이벤트를 클라이언트 전체에 전송
-			
+
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			
+
 			// 테스트 용도
 			int t = 10;
 			String msg = Integer.toString(t);
-			
 
 			while (t > 0) // 10초 타이머 시작
 			{

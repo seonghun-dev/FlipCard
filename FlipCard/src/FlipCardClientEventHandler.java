@@ -1,3 +1,4 @@
+
 /**FlipCardClientEventHandler
  */
 import java.awt.Color;
@@ -42,7 +43,7 @@ public class FlipCardClientEventHandler implements CMAppEventHandler {
 		switch (se.getID()) {
 		case CMSessionEvent.LOGIN_ACK:
 			System.out.println("로그인 인증 받았음");
-			game.setLocationRelativeTo(null); //화면 가운데 고정
+			game.setLocationRelativeTo(null); // 화면 가운데 고정
 			game.setVisible(true); // 메인게임 화면 시작
 			break;
 		case CMSessionEvent.SESSION_TALK:
@@ -87,25 +88,25 @@ public class FlipCardClientEventHandler implements CMAppEventHandler {
 			game.init(); // 카드 초기화
 			game.setstartflag(true);
 			break;
-			
+
 		case "FLIP":
 			game.printMessage("메세지 받음");
-			ChangeColor(Integer.parseInt(splitMsg[1]),splitMsg[2]);// 카드 변경
+			ChangeColor(Integer.parseInt(splitMsg[1]), splitMsg[2]);// 카드 변경
 			break;
-			
+
 		case "STOP":
-			game.setstartflag(false); //게임 중단.
+			game.setstartflag(false); // 게임 중단.
 			game.init(); // 카드 초기화
-			//결과창
+			// 결과창
 			isregame.ShowWinner("BLUE");
 			isregame.setLocationRelativeTo(null);
 			isregame.setVisible(true);
 			game.resettext();
 			// 채팅창에 표시
 			break;
-			
+
 		case "TIMER":
-				game.Timershow.setText(splitMsg[1]);
+			game.Timershow.setText(splitMsg[1]);
 			break;
 
 		case "WIN":
@@ -114,11 +115,11 @@ public class FlipCardClientEventHandler implements CMAppEventHandler {
 		}
 
 	}
-	
+
 	// 서버에서 받아온 값 변화
 	public void ChangeColor(int Cardnum, String Color) {
 		switch (Color) {
-		case  "BROWN":
+		case "BROWN":
 			game.CardArray[Cardnum].setIcon(new ImageIcon("../FlipCard/Img/Cardusr1.png"));
 			break;
 		case "BLUE":
