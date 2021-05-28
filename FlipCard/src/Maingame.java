@@ -7,7 +7,6 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
 import javax.swing.JTextField;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JTextPane;
 import javax.swing.JButton;
@@ -23,7 +22,6 @@ import kr.ac.konkuk.ccslab.cm.stub.CMClientStub;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.Scrollbar;
 import javax.swing.JScrollPane;
 
 public class Maingame extends JFrame {

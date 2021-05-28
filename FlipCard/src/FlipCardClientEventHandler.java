@@ -1,11 +1,7 @@
 
 /**FlipCardClientEventHandler
  */
-import java.awt.Color;
-
 import javax.swing.ImageIcon;
-import javax.swing.JDialog;
-
 import kr.ac.konkuk.ccslab.cm.event.CMDummyEvent;
 import kr.ac.konkuk.ccslab.cm.event.CMEvent;
 import kr.ac.konkuk.ccslab.cm.event.CMSessionEvent;
