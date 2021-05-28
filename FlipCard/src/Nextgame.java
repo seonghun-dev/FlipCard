@@ -1,3 +1,9 @@
+/**Nextgame
+ *This Class Means Nextgame
+ *
+ */
+
+
 import java.awt.BorderLayout;
 import java.awt.Toolkit;
 
@@ -23,6 +29,7 @@ public class Nextgame extends JDialog {
 	 */
 	public Nextgame() {
 		setTitle("Result");
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("../FlipCard/Img/icon.png"));
 		setBounds(100, 100, 450, 290);
 		getContentPane().setLayout(new BorderLayout());
@@ -64,18 +71,18 @@ public class Nextgame extends JDialog {
 		}
 	}
 
-	public void ShowWinner(int winnernum) {
-		switch (winnernum) {
-		case 1:
+	public void ShowWinner(String winner) {
+		switch (winner) {
+		case "BROWN":
 			ResultLabel.setIcon(new ImageIcon("../FlipCard/Img/win_brown.png"));
 			break;
-		case 2:
+		case "BLUE":
 			ResultLabel.setIcon(new ImageIcon("../FlipCard/Img/win_blue.png"));
 			break;
-		case 3:
+		case "PINK":
 			ResultLabel.setIcon(new ImageIcon("../FlipCard/Img/win_pink.png"));
 			break;
-		case 4:
+		case "GREEN":
 			ResultLabel.setIcon(new ImageIcon("../FlipCard/Img/win_green.png"));
 			break;
 		}

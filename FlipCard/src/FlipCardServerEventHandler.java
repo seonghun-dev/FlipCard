@@ -72,11 +72,9 @@ public class FlipCardServerEventHandler implements CMAppEventHandler {
 				msg = "LOGIN;" + h.get(color[Membernum]) + ";" + color[Membernum];
 				due.setDummyInfo(msg);
 				m_serverStub.cast(due, null, null);// 새로운 사용자 정보 cast
-				if (Membernum == 4) {// 지금 로그인 요청을 한 사용자를 포함하여 4명의 사용자가 모두 로그인했다면 타이머
+				if (m_serverStub.getLoginUsers().getMemberNum() == 2) {// 지금 로그인 요청을 한 사용자를 포함하여 4명의 사용자가 모두 로그인했다면 타이머
 					Membernum++;
-					due.setDummyInfo("START");// 실행
-					m_serverStub.cast(due, null, null); // 시작하겠다는 더미 이벤트를 클라이언트 전체에 전송
-					//timer.start();
+					timer.start();
 				}
 			}
 
@@ -147,10 +145,33 @@ public class FlipCardServerEventHandler implements CMAppEventHandler {
 
 		@Override
 		public void run() {
+			
+			due.setDummyInfo("READY");// 대기
+			m_serverStub.cast(due, null, null); // 대기하겠다는 더미 이벤트를 클라이언트 전체에 전송
+			
+			// 대기 상태
+			
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 
+			due.setDummyInfo("START");// 실행
+			m_serverStub.cast(due, null, null); // 시작하겠다는 더미 이벤트를 클라이언트 전체에 전송
+			
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
 			// 테스트 용도
-			int t = 30;
+			int t = 10;
 			String msg = Integer.toString(t);
+			
 
 			while (t > 0) // 10초 타이머 시작
 			{

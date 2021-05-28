@@ -30,7 +30,6 @@ public class FlipCardClient {
 		Login window = new Login(client);
 		window.frmFlipCard.setLocationRelativeTo(null);
 		window.frmFlipCard.setVisible(true);
-		System.out.println("작업스레드 이름 : " + Thread.currentThread().getName() + System.currentTimeMillis());
 	}
 
 	public void FlipCardClientGame(CMClientStub clientStub) {

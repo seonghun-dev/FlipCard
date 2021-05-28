@@ -58,7 +58,7 @@ public class Maingame extends JFrame {
 	public Maingame(FlipCardClient client) {
 
 		m_client = client;
-
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("../FlipCard/Img/icon.png"));
 		setFont(new Font("Brush Script MT", Font.PLAIN, 15));
 		setTitle("FlipCard");
@@ -292,33 +292,11 @@ public class Maingame extends JFrame {
 		}
 	}
 
-	// 서버에서 받아온 값 변화
-	public void ChangeColor(int Cardnum, int Color) {
-		switch (Color) {
-		case 1:
-			CardArray[Cardnum].setIcon(new ImageIcon("../FlipCard/Img/Cardusr1.png"));
-			break;
-		case 2:
-			CardArray[Cardnum].setIcon(new ImageIcon("../FlipCard/Img/Cardusr2.png"));
-			break;
-		case 3:
-			CardArray[Cardnum].setIcon(new ImageIcon("../FlipCard/Img/Cardusr3.png"));
-			break;
-		case 4:
-			CardArray[Cardnum].setIcon(new ImageIcon("../FlipCard/Img/Cardusr4.png"));
-			break;
-		default:
-			CardArray[Cardnum].setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
-			break;
-		}
-		printMessage("변경");
-		printMessage(Integer.toString(Color));
-		printMessage(Integer.toString(Cardnum));
-	}
 
 	// 서버로 컬러값 보내주는 부분
 	public void sendColor(int Cardnum, int indexofColor) {
 		String Color = "";
+		if(startflag) {
 		switch (indexofColor) {
 		case 1:
 			Color = "BROWN";
@@ -338,7 +316,7 @@ public class Maingame extends JFrame {
 		CMDummyEvent due = new CMDummyEvent();
 		due.setDummyInfo(result);
 		m_client.m_clientStub.send(due, "SERVER");
-		printMessage("메세지 보냄");
+		}
 		return;
 	}
 

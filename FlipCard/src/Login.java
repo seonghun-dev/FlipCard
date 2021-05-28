@@ -41,6 +41,7 @@ public class Login {
 	private void initialize() {
 
 		frmFlipCard = new JFrame();
+		frmFlipCard.setResizable(false);
 		frmFlipCard.setIconImage(Toolkit.getDefaultToolkit().getImage("../FlipCard/Img/icon.png"));
 		frmFlipCard.setTitle("Flip Card");
 		frmFlipCard.getContentPane().setBackground(Color.WHITE);

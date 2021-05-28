@@ -1,5 +1,7 @@
 /**FlipCardClientEventHandler
  */
+import java.awt.Color;
+
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 
@@ -71,50 +73,42 @@ public class FlipCardClientEventHandler implements CMAppEventHandler {
 			String Color = splitMsg[2];
 			MyUser.ChangeCurrentUser(UserID, Color);
 			game.resettext();
-			if (UserID.equals(User.myname)) {  //내 색상 지정.
+			if (UserID.equals(User.myname)) { // 내 색상 지정.
 				MyUser.GetMyuserColor(UserID);
 			}
 			break;
-			
-		case "START":
+
+		case "READY":
 			game.printMessage("[공지] 게임이 곧 시작합니다. \n");
+			break;
+
+		case "START":
+			game.Timershow.setText("START");
 			game.init(); // 카드 초기화
 			game.setstartflag(true);
 			break;
 			
-			
 		case "FLIP":
 			game.printMessage("메세지 받음");
-			System.out.println("작업스레드 이름 : " + Thread.currentThread().getName() + System.currentTimeMillis());
 			ChangeColor(Integer.parseInt(splitMsg[1]),splitMsg[2]);// 카드 변경
 			break;
 			
 		case "STOP":
 			game.setstartflag(false); //게임 중단.
 			game.init(); // 카드 초기화
+			//결과창
+			isregame.ShowWinner("BLUE");
+			isregame.setLocationRelativeTo(null);
+			isregame.setVisible(true);
+			game.resettext();
+			// 채팅창에 표시
 			break;
 			
 		case "TIMER":
-			/*
-			if (game.getstartflag()) {
 				game.Timershow.setText(splitMsg[1]);
-			}
-			*/
-			if (Integer.parseInt(splitMsg[1]) == 0) {
-
-				isregame.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-				isregame.ShowWinner(2);
-				isregame.setLocationRelativeTo(null);
-				isregame.setVisible(true);
-				while (!isregame.regame) {
-				}
-				isregame.setVisible(false);
-				game.resettext();
-			}
 			break;
 
 		case "WIN":
-			// 채팅창에 표시
 			break;
 
 		}
