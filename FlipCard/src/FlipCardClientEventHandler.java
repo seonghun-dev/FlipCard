@@ -1,5 +1,5 @@
-
-//FlipCardClientEventHandler 재생성
+/**FlipCardClientEventHandler
+ */
 import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 
@@ -40,11 +40,8 @@ public class FlipCardClientEventHandler implements CMAppEventHandler {
 		switch (se.getID()) {
 		case CMSessionEvent.LOGIN_ACK:
 			System.out.println("로그인 인증 받았음");
-			m_client.openflag = true;
-			game.setLocationRelativeTo(null);
+			game.setLocationRelativeTo(null); //화면 가운데 고정
 			game.setVisible(true); // 메인게임 화면 시작
-			// Login 클래스에서 다음 "로그인 완료되었습니다." 메세지 출력된다.
-			// 비동기식으로 구현했음
 			break;
 		case CMSessionEvent.SESSION_TALK:
 			// 클라이언트 간 채팅 구현
@@ -72,49 +69,37 @@ public class FlipCardClientEventHandler implements CMAppEventHandler {
 		case "LOGIN":
 			String UserID = splitMsg[1];
 			String Color = splitMsg[2];
-
 			MyUser.ChangeCurrentUser(UserID, Color);
 			game.resettext();
-
-			// 메인게임 불러오기-연결만
-			if (UserID.equals(User.myname)) {
+			if (UserID.equals(User.myname)) {  //내 색상 지정.
 				MyUser.GetMyuserColor(UserID);
 			}
 			break;
+			
 		case "START":
 			game.printMessage("[공지] 게임이 곧 시작합니다. \n");
 			game.init(); // 카드 초기화
 			game.setstartflag(true);
 			break;
+			
+			
 		case "FLIP":
 			game.printMessage("메세지 받음");
-			int Color1 = 0;
-			switch (splitMsg[2]) {
-			case "BROWN":
-				Color1 = 1;
-				break;
-			case "BLUE":
-				Color1 = 2;
-				break;
-			case "PINK":
-				Color1 = 3;
-				break;
-			case "GREEN":
-				Color1 = 4;
-				break;
-			}
-			ChangeColor(Color1, Integer.parseInt(splitMsg[1]));
-			// 카드 변경
+			System.out.println("작업스레드 이름 : " + Thread.currentThread().getName() + System.currentTimeMillis());
+			ChangeColor(Integer.parseInt(splitMsg[1]),splitMsg[2]);// 카드 변경
+			break;
+			
 		case "STOP":
-			game.setstartflag(false);
-			game.init();
-			// 시간 0초로 보여짐
-			// 카드 초기화
-			// 클라측 이벤트 핸들러 중단
+			game.setstartflag(false); //게임 중단.
+			game.init(); // 카드 초기화
+			break;
+			
 		case "TIMER":
+			/*
 			if (game.getstartflag()) {
 				game.Timershow.setText(splitMsg[1]);
 			}
+			*/
 			if (Integer.parseInt(splitMsg[1]) == 0) {
 
 				isregame.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -126,36 +111,35 @@ public class FlipCardClientEventHandler implements CMAppEventHandler {
 				isregame.setVisible(false);
 				game.resettext();
 			}
+			break;
 
 		case "WIN":
 			// 채팅창에 표시
+			break;
 
 		}
 
 	}
 	
 	// 서버에서 받아온 값 변화
-	public void ChangeColor(int Cardnum, int Color) {
+	public void ChangeColor(int Cardnum, String Color) {
 		switch (Color) {
-		case 1:
+		case  "BROWN":
 			game.CardArray[Cardnum].setIcon(new ImageIcon("../FlipCard/Img/Cardusr1.png"));
 			break;
-		case 2:
+		case "BLUE":
 			game.CardArray[Cardnum].setIcon(new ImageIcon("../FlipCard/Img/Cardusr2.png"));
 			break;
-		case 3:
+		case "PINK":
 			game.CardArray[Cardnum].setIcon(new ImageIcon("../FlipCard/Img/Cardusr3.png"));
 			break;
-		case 4:
+		case "GREEN":
 			game.CardArray[Cardnum].setIcon(new ImageIcon("../FlipCard/Img/Cardusr4.png"));
 			break;
 		default:
 			game.CardArray[Cardnum].setIcon(new ImageIcon("../FlipCard/Img/Cardfirst.png"));
 			break;
 		}
-		game.printMessage("변경");
-		game.printMessage(Integer.toString(Color));
-		game.printMessage(Integer.toString(Cardnum)+"\n");
 	}
 
 }

@@ -93,7 +93,7 @@ public class Maingame extends JFrame {
 
 		CardArray[0].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ClickHandler(0);
+				//ClickHandler(0);
 				sendColor(0, MyUser.GetMyColor());
 			}
 		});
@@ -102,7 +102,7 @@ public class Maingame extends JFrame {
 
 		CardArray[1].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ClickHandler(1);
+				//ClickHandler(1);
 				sendColor(1, MyUser.GetMyColor());
 			}
 		});
@@ -111,7 +111,7 @@ public class Maingame extends JFrame {
 
 		CardArray[2].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ClickHandler(2);
+				//ClickHandler(2);
 				sendColor(2, MyUser.GetMyColor());
 			}
 		});
@@ -120,7 +120,7 @@ public class Maingame extends JFrame {
 
 		CardArray[3].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ClickHandler(3);
+				//ClickHandler(3);
 				sendColor(3, MyUser.GetMyColor());
 			}
 		});
@@ -129,7 +129,7 @@ public class Maingame extends JFrame {
 
 		CardArray[4].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ClickHandler(4);
+				//ClickHandler(4);
 				sendColor(4, MyUser.GetMyColor());
 			}
 		});
@@ -138,7 +138,7 @@ public class Maingame extends JFrame {
 
 		CardArray[5].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ClickHandler(5);
+				//ClickHandler(5);
 				sendColor(5, MyUser.GetMyColor());
 			}
 		});
@@ -147,7 +147,7 @@ public class Maingame extends JFrame {
 
 		CardArray[6].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ClickHandler(6);
+				//ClickHandler(6);
 				sendColor(6, MyUser.GetMyColor());
 			}
 		});
@@ -156,7 +156,7 @@ public class Maingame extends JFrame {
 
 		CardArray[7].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ClickHandler(7);
+				//ClickHandler(7);
 				sendColor(7, MyUser.GetMyColor());
 			}
 		});
@@ -165,7 +165,7 @@ public class Maingame extends JFrame {
 
 		CardArray[8].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ClickHandler(8);
+				//ClickHandler(8);
 				sendColor(8, MyUser.GetMyColor());
 			}
 		});
@@ -174,7 +174,7 @@ public class Maingame extends JFrame {
 
 		CardArray[9].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ClickHandler(9);
+				//ClickHandler(9);
 				sendColor(9, MyUser.GetMyColor());
 			}
 		});
@@ -183,7 +183,7 @@ public class Maingame extends JFrame {
 
 		CardArray[10].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ClickHandler(10);
+				//ClickHandler(10);
 				sendColor(10, MyUser.GetMyColor());
 			}
 		});
@@ -192,7 +192,7 @@ public class Maingame extends JFrame {
 
 		CardArray[11].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ClickHandler(11);
+				//ClickHandler(11);
 				sendColor(11, MyUser.GetMyColor());
 			}
 		});
@@ -201,7 +201,7 @@ public class Maingame extends JFrame {
 
 		CardArray[12].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ClickHandler(12);
+				//ClickHandler(12);
 				sendColor(12, MyUser.GetMyColor());
 			}
 		});
@@ -210,7 +210,7 @@ public class Maingame extends JFrame {
 
 		CardArray[13].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ClickHandler(13);
+				//ClickHandler(13);
 				sendColor(13, MyUser.GetMyColor());
 			}
 		});
@@ -219,7 +219,7 @@ public class Maingame extends JFrame {
 
 		CardArray[14].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ClickHandler(14);
+				//ClickHandler(14);
 				sendColor(14, MyUser.GetMyColor());
 			}
 		});
@@ -228,7 +228,7 @@ public class Maingame extends JFrame {
 
 		CardArray[15].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ClickHandler(15);
+				//ClickHandler(15);
 				sendColor(15, MyUser.GetMyColor());
 			}
 		});

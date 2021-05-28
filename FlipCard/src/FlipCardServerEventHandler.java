@@ -76,7 +76,7 @@ public class FlipCardServerEventHandler implements CMAppEventHandler {
 					Membernum++;
 					due.setDummyInfo("START");// 실행
 					m_serverStub.cast(due, null, null); // 시작하겠다는 더미 이벤트를 클라이언트 전체에 전송
-					timer.start();
+					//timer.start();
 				}
 			}
 

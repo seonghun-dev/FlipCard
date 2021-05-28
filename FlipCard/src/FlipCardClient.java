@@ -8,8 +8,6 @@ public class FlipCardClient {
 	CMUser myself;
 	public CMClientStub m_clientStub;
 	public FlipCardClientEventHandler m_eventHandler;
-	String uname = "";
-	boolean openflag = false;
 
 	public FlipCardClient() {
 		m_clientStub = new CMClientStub();
@@ -32,13 +30,13 @@ public class FlipCardClient {
 		Login window = new Login(client);
 		window.frmFlipCard.setLocationRelativeTo(null);
 		window.frmFlipCard.setVisible(true);
+		System.out.println("작업스레드 이름 : " + Thread.currentThread().getName() + System.currentTimeMillis());
 	}
 
 	public void FlipCardClientGame(CMClientStub clientStub) {
 		m_clientStub = clientStub;
 		CMInteractionInfo interInfo = m_clientStub.getCMInfo().getInteractionInfo();
 		myself = interInfo.getMyself();
-		uname = myself.getName();
 	}
 
 }

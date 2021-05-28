@@ -23,9 +23,8 @@ public class Login {
 
 	public JFrame frmFlipCard;
 	private JTextField username;
-	CMSessionEvent loginAckEvent = null; //
-	static boolean loginSendcheck = false;
-
+	
+	CMSessionEvent loginAckEvent = null; 
 	JButton btnLogin = new JButton("Login");
 
 	/**

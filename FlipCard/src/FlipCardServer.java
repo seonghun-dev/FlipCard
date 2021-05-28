@@ -1,5 +1,8 @@
+/**FlipCardServer
+ *This Class Means Main FlipCardServer
+ *
+ */
 
-//FlipCardServer
 import kr.ac.konkuk.ccslab.cm.stub.CMServerStub;
 
 public class FlipCardServer {
@@ -24,7 +27,6 @@ public class FlipCardServer {
 		CMServerStub cmStub = srv.getServerStub();
 		cmStub.setAppEventHandler(srv.getServerEventHandler());
 		cmStub.startCM();
-
 	}
 
 }
