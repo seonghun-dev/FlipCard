@@ -6,7 +6,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
 import javax.swing.JTextField;
-
 import java.awt.Color;
 import javax.swing.JTextPane;
 import javax.swing.JButton;
@@ -15,13 +14,15 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import kr.ac.konkuk.ccslab.cm.event.CMDummyEvent;
-import kr.ac.konkuk.ccslab.cm.stub.CMClientStub;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
+
 import javax.swing.JScrollPane;
 
 public class Maingame extends JFrame {
@@ -30,6 +31,7 @@ public class Maingame extends JFrame {
 	public JLabel Timershow = new JLabel("ready");
 	private static boolean startflag = false; // 게임 진행
 	JTextPane m_outTextPane = new JTextPane();
+	JLabel Regame;
 
 	FlipCardClient m_client;
 
@@ -346,11 +348,13 @@ public class Maingame extends JFrame {
 	// 채팅창 입력 내용 전송
 	public void inputMsg() {
 		String strText = textField.getText();
-		printMessage("[" + MyUser.GetMyname() + "]" + strText + "\n");
+		// printMessage("[" + MyUser.GetMyname() + "]" + strText + "\n");
 		textField.setText("");
 		textField.requestFocus();
-	}
 
+		m_client.m_clientStub.chat("/b", strText);
+	}
+	
 	// 채팅창 입력내용 표시
 	public void printMessage(String strText) {
 		StyledDocument doc = m_outTextPane.getStyledDocument();
@@ -371,5 +375,7 @@ public class Maingame extends JFrame {
 	public boolean getstartflag() {
 		return startflag;
 	}
+
+
 
 }
