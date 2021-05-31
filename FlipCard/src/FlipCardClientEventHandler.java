@@ -43,10 +43,7 @@ public class FlipCardClientEventHandler implements CMAppEventHandler {
          game.setVisible(true); // 메인게임 화면 시작
          break;
       case CMSessionEvent.SESSION_TALK:
-         game.printMessage("[" + se.getUserName() + "]" + se.getTalk() + "\n");
-         // 클라이언트 간 채팅 구현
-         // 채팅 이벤트 받으면 메인 게임 내 채팅 보여지는 부분에 표시하도록
-         // "사용자ID : 메세지"
+         game.printMessage("[" + se.getUserName() + "]" + se.getTalk() + "\n"); // 클라이언트 간 채팅 구현
          break;
       default:
          return;
@@ -91,12 +88,6 @@ public class FlipCardClientEventHandler implements CMAppEventHandler {
       case "STOP":
          game.setstartflag(false); //게임 중단.
          game.init(); // 카드 초기화
-         //결과창
-         /*isregame.ShowWinner("BLUE");
-         isregame.setLocationRelativeTo(null);
-         isregame.setVisible(true);
-         game.resettext();*/
-         // 채팅창에 표시
          break;
          
       case "TIMER":

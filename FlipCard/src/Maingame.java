@@ -237,6 +237,7 @@ public class Maingame extends JFrame {
 
 		// 사용자 정보
 		JLabel Usrbackground = new JLabel("");
+		Usrbackground.setFont(new Font("KoPubWorld돋움체 Medium", Font.PLAIN, 12));
 		Usrbackground.setIcon(new ImageIcon("../FlipCard/Img/usrbackground.png"));
 		Usrbackground.setBounds(472, 23, 286, 153);
 		contentPane.add(Usrbackground);
@@ -245,7 +246,7 @@ public class Maingame extends JFrame {
 		m_outTextPane.setEditable(false);
 		m_outTextPane.setBackground(new Color(245, 245, 245));
 		m_outTextPane.setBounds(472, 218, 286, 217);
-		m_outTextPane.setFont(new Font("함초롬돋움", Font.PLAIN, 14));
+		m_outTextPane.setFont(new Font("KoPubWorld돋움체 Medium", Font.PLAIN, 14));
 		contentPane.add(m_outTextPane);
 		JScrollPane scrollPane = new JScrollPane(m_outTextPane);
 		scrollPane.setBounds(472, 218, 286, 217);
