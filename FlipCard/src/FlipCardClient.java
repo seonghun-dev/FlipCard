@@ -1,4 +1,3 @@
-
 //FlipCardClient
 import kr.ac.konkuk.ccslab.cm.entity.CMUser;
 import kr.ac.konkuk.ccslab.cm.info.CMInteractionInfo;
@@ -26,8 +25,8 @@ public class FlipCardClient {
       FlipCardClient client = new FlipCardClient();
       CMClientStub cmStub = client.getClientStub();
       cmStub.setAppEventHandler(client.getClientEventHandler());
-      cmStub.startCM();
-      Login window = new Login(client);
+      cmStub.startCM(); //CM start
+      Login window = new Login(client); //show Login user interface
       window.frmFlipCard.setLocationRelativeTo(null);
       window.frmFlipCard.setVisible(true);
    }

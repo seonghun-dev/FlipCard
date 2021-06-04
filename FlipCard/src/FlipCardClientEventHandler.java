@@ -1,8 +1,7 @@
-/**FlipCardClientEventHandler
- */
+//FlipCardClientEventHandler
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
 import kr.ac.konkuk.ccslab.cm.event.CMDummyEvent;
 import kr.ac.konkuk.ccslab.cm.event.CMEvent;
 import kr.ac.konkuk.ccslab.cm.event.CMSessionEvent;
@@ -11,21 +10,23 @@ import kr.ac.konkuk.ccslab.cm.info.CMInfo;
 
 public class FlipCardClientEventHandler implements CMAppEventHandler {
 
+   public JFrame loginack;
    private FlipCardClient m_client;
    Maingame game;
-
+   
    public FlipCardClientEventHandler(FlipCardClient client) {
       m_client = client;
       game = new Maingame(m_client);
+      loginack = new JFrame();      
    }
 
    @Override
    public void processEvent(CMEvent cme) {
       switch (cme.getType()) {
-      case CMInfo.CM_SESSION_EVENT: // 로그인, 세션, 그룹 조인 이벤트
+      case CMInfo.CM_SESSION_EVENT: //event for login, chatting
          processSessionEvent(cme);
          break;
-      case CMInfo.CM_DUMMY_EVENT: // 메세지 프로토콜 이벤트
+      case CMInfo.CM_DUMMY_EVENT: //event for message protocol
          processDummyEvent(cme);
          break;
       default:
@@ -37,13 +38,24 @@ public class FlipCardClientEventHandler implements CMAppEventHandler {
 
       CMSessionEvent se = (CMSessionEvent) cme;
       switch (se.getID()) {
-      case CMSessionEvent.LOGIN_ACK:
-         System.out.println("로그인 인증 받았음");
-         game.setLocationRelativeTo(null); //화면 가운데 고정
-         game.setVisible(true); // 메인게임 화면 시작
+      case CMSessionEvent.LOGIN_ACK: //login acknowledge
+           if(se.isValidUser() == 0)
+         {
+            JOptionPane.showMessageDialog(loginack, "로그인에 실패했습니다.");
+         }
+         else if(se.isValidUser() == -1)
+         {
+            JOptionPane.showMessageDialog(loginack, "이미 로그인한 사용자입니다.");
+         }
+         else
+         {
+            JOptionPane.showMessageDialog(loginack, "로그인이 완료되었습니다.");
+            game.setLocationRelativeTo(null); 
+            game.setVisible(true); //start Maingame
+         }
          break;
-      case CMSessionEvent.SESSION_TALK:
-         game.printMessage("[" + se.getUserName() + "]" + se.getTalk() + "\n"); // 클라이언트 간 채팅 구현
+      case CMSessionEvent.SESSION_TALK: //chatting event
+         game.printMessage("[" + se.getUserName() + "]" + se.getTalk() + "\n");
          break;
       default:
          return;
@@ -81,7 +93,6 @@ public class FlipCardClientEventHandler implements CMAppEventHandler {
          break;
          
       case "FLIP":
-         game.printMessage("메세지 받음");
          ChangeColor(Integer.parseInt(splitMsg[1]),splitMsg[2]);// 카드 변경
          break;
          
@@ -139,23 +150,25 @@ public class FlipCardClientEventHandler implements CMAppEventHandler {
       }
    }
    
-   
-	public void Isregame() {
-		int result = JOptionPane.showConfirmDialog(game, "계속하시겠습니까?", "한판 더?", JOptionPane.YES_NO_OPTION);
-		if (result == JOptionPane.YES_OPTION) {
-		} 
-		else {
-			if(m_client.m_clientStub.logoutCM()) {
-		         try {
-		             Thread.sleep(500);
-		          } catch (InterruptedException e1) {
-		             // TODO Auto-generated catch block
-		             e1.printStackTrace();
-		          }
+   public void Isregame() {
+         int result = JOptionPane.showConfirmDialog(game, "계속하시겠습니까?", "한판 더?", JOptionPane.YES_NO_OPTION);
+         if (result == JOptionPane.YES_OPTION) {
+            CMDummyEvent due = new CMDummyEvent();  //서버에 보내는
+            due.setDummyInfo("RESTART");
+            m_client.m_clientStub.send(due, "SERVER");
+         } 
+         else {
+            if(m_client.m_clientStub.logoutCM()) {
+                  try {
+                      Thread.sleep(500);
+                   } catch (InterruptedException e1) {
+                      // TODO Auto-generated catch block
+                      e1.printStackTrace();
+                   }
 
-			};
-			System.exit(0);
-		}
-	}
+            };
+            System.exit(0);
+         }
+      }
 
 }

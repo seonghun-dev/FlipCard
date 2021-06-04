@@ -1,8 +1,4 @@
-/**FlipCardServer
- *This Class Means Main FlipCardServer
- *
- */
-
+//FlipCardServer
 import kr.ac.konkuk.ccslab.cm.stub.CMServerStub;
 
 public class FlipCardServer {
