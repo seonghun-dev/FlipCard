@@ -23,7 +23,7 @@ Flip Card는 4인용 카드 뒤집기 게임입니다. 주어진 시간 내에 �
 
 <div align="center">
   <br/>
-  <a href="https://youtu.be/NTP5FgsMYXg" target="_blank"><img src="https://github.com/seonghun-dev/seonghun-dev.github.io/blob/main/images/Flip%20Card%20youtube.png?raw=true" height="400" >
+  <a href="https://youtu.be/NTP5FgsMYXg"target="_blank"><img src="https://github.com/seonghun-dev/seonghun-dev.github.io/blob/main/images/Flip%20Card%20youtube.png?raw=true" height="400" >
   <br/>
   <br/>
     <p>
