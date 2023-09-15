@@ -1,9 +1,11 @@
 # FLIP CARD
 <div align="center">
   <br/>
-  <img src="https://github.com/seonghun-dev/seonghun-dev.github.io/raw/main/images/FlipCard.png?raw=true"/>
-  <img src="https://github.com/seonghun-dev/seonghun-dev.github.io/blob/main/images/006.png?raw=true"/>
+  <img src="https://github.com/seonghun-dev/ReadmeImage/blob/main/src/FlipCard/flipcard_logo.png?raw=true"/>
+  <img src="https://github.com/seonghun-dev/ReadmeImage/blob/main/src/FlipCard/flipcard_explain1.png?raw=true"/>
   <br/>
+
+  
   <br/>
   <p>
     FLIP CARD <br>
@@ -23,7 +25,7 @@ Flip Card는 4인용 카드 뒤집기 게임입니다. 주어진 시간 내에 �
 
 <div align="center">
   <br/>
-  <a href="https://youtu.be/NTP5FgsMYXg"><img src="https://github.com/seonghun-dev/seonghun-dev.github.io/blob/main/images/Flip%20Card%20youtube.png?raw=true" height="400" >
+  <a href="https://youtu.be/NTP5FgsMYXg"><img src="https://github.com/seonghun-dev/ReadmeImage/blob/main/src/FlipCard/flipcard_thumbnail.png?raw=true" height="400" >
   <br/>
   <br/>
     <p>
@@ -37,7 +39,7 @@ Flip Card는 4인용 카드 뒤집기 게임입니다. 주어진 시간 내에 �
 ## :mega: 게임 시나리오
 <div align="center">
   <br/>
-  <img src="https://github.com/seonghun-dev/seonghun-dev.github.io/blob/main/images/Flip%20Card%20in%20game.png?raw=true" height="400">
+  <img src="https://github.com/seonghun-dev/ReadmeImage/blob/main/src/FlipCard/flipcard_ingame.png?raw=true" height="400">
   <br/>
   <br/>
   </p>
@@ -67,7 +69,7 @@ Flip Card는 4인용 카드 뒤집기 게임입니다. 주어진 시간 내에 �
 
 <div align="center">
   <br/>
-  <img src="https://github.com/seonghun-dev/seonghun-dev.github.io/blob/main/images/FlipCard%20flowchart.jpeg?raw=true/" height="500">
+  <img src="https://github.com/seonghun-dev/ReadmeImage/blob/main/src/FlipCard/flipcard_flowchart.jpeg?raw=true" height="500">
   <br/>
   <br/>
   <p>
@@ -83,7 +85,7 @@ Flip Card는 4인용 카드 뒤집기 게임입니다. 주어진 시간 내에 �
 
 <div align="center">
   <br/>
-  <img src="https://github.com/seonghun-dev/seonghun-dev.github.io/blob/main/images/FlipCard%20class%20diagram.jpeg?raw=true">
+  <img src="https://github.com/seonghun-dev/ReadmeImage/blob/main/src/FlipCard/flipcard_classdiagram.jpeg?raw=true">
   <br/>
   <br/>
   <p>
